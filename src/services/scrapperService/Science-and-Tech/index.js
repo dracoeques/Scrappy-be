@@ -1,7 +1,7 @@
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import { getArticles } from "../../../utils/puppeteer/get-articles.js";
-import arsTechnica from "./arstechnica.js";
+import arsTechnica from "./arsTechnica.js";
 import cnet from "./cnet.js";
 import engadget from "./engadget.js";
 import gizmodo from "./gizmodo.js";
