@@ -1,6 +1,6 @@
 import { checkIsEntryFile } from "../../../utils/utils.js";
 import { getArticles } from "../../../utils/puppeteer/get-articles.js";
-import vogue from "./Vogue.js";
+import vogue from "./vogue.js";
 import artNews from "./artNews.js";
 import artsy from "./artsy.js";
 import dazed from "./dazed.js";
