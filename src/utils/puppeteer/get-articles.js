@@ -5,127 +5,131 @@ import { readSavedDocumnets, saveDocuments, scrollToBottom } from "../utils.js";
 puppeteer.use(StealthPlugin());
 
 export const getArticles = async (inputProps) => {
-  if (!inputProps) return;
-  const {
-    name,
-    url,
-    linkSelector,
-    articleSelectors,
-    waitUntil,
-    articlesWaitUntil = "domcontentloaded",
-    Model,
-    saveAfter = 1,
-  } = inputProps;
-  const currentSaved = await readSavedDocumnets(Model, name);
-  const currentLinks = currentSaved.map((el) => el.link);
+  try {
+    if (!inputProps) return;
+    const {
+      name,
+      url,
+      linkSelector,
+      articleSelectors,
+      waitUntil,
+      articlesWaitUntil = "domcontentloaded",
+      Model,
+      saveAfter = 1,
+    } = inputProps;
+    const currentSaved = await readSavedDocumnets(Model, name);
+    const currentLinks = currentSaved.map((el) => el.link);
 
-  // making sure articleWaitUntil has a correct value
-  const articlesWaitUntilVal =
-    articlesWaitUntil !== "domcontentloaded" &&
-    articlesWaitUntil !== "networkidle0" &&
-    articlesWaitUntil !== "networkidle2" &&
-    articlesWaitUntil !== "load"
-      ? "domcontentloaded"
-      : articlesWaitUntil;
+    // making sure articleWaitUntil has a correct value
+    const articlesWaitUntilVal =
+      articlesWaitUntil !== "domcontentloaded" &&
+      articlesWaitUntil !== "networkidle0" &&
+      articlesWaitUntil !== "networkidle2" &&
+      articlesWaitUntil !== "load"
+        ? "domcontentloaded"
+        : articlesWaitUntil;
 
-  const browser = await puppeteer.launch({
-    headless: true,
-  });
+    const browser = await puppeteer.launch({
+      headless: true,
+    });
 
-  // create a page and set its viewport
-  const page = await browser.newPage();
-  await page.setViewport({ width: 1000, height: 6000 });
+    // create a page and set its viewport
+    const page = await browser.newPage();
+    await page.setViewport({ width: 1000, height: 6000 });
 
-  // navigate to url and wait for it to load
-  const pageData = [];
-  let baseUrl = [];
-  if (!Array.isArray(url)) baseUrl.push(url);
-  else baseUrl = url;
-  for (let curr_url of baseUrl) {
-    for (let selector of linkSelector) {
-      try {
-        await page.goto(curr_url, {
-          waitUntil: "domcontentloaded",
-          timeout: 0,
-        });
-      } catch {
-        console.error(`Error navigating to link ${curr_url}.`);
-        continue;
-      }
-
-      try {
-        await scrollToBottom(page);
-      } catch {
-        console.log(
-          `Error when trying to scroll to bottom of page ${curr_url}`
-        );
-      }
-
-      if (waitUntil) {
+    // navigate to url and wait for it to load
+    const pageData = [];
+    let baseUrl = [];
+    if (!Array.isArray(url)) baseUrl.push(url);
+    else baseUrl = url;
+    for (let curr_url of baseUrl) {
+      for (let selector of linkSelector) {
         try {
-          await page.waitForSelector(waitUntil.join(", "));
-        } catch (err) {
-          console.error(`Problem waiting for selector ${waitUntil}`);
-        }
-      }
-
-      console.log(`NAVIGATED TO ${curr_url}`);
-
-      try {
-        await page.waitForSelector(selector);
-      } catch (err) {
-        console.error(`Problem waiting for selector ${selector}`);
-      }
-
-      const links = await page.$$eval(selector, (links) =>
-        links.map((link) => link.href)
-      );
-
-      let pageCount = 1;
-      let saveCount = 1;
-      const totalPages = links.length;
-      for (let link of links) {
-        // checking if link is already fetched.
-        if (currentLinks.includes(link)) {
-          console.log("Link already fetched. Skipping link");
-          pageCount++;
+          await page.goto(curr_url, {
+            waitUntil: "domcontentloaded",
+            timeout: 0,
+          });
+        } catch {
+          console.error(`Error navigating to link ${curr_url}.`);
           continue;
-        } else console.log("Link not found. Fetching link");
-
-        console.log(`page ${pageCount} of ${totalPages}`);
-
-        const currPage = await getPageData(link, page, articlesWaitUntilVal, {
-          ...articleSelectors,
-        });
-        console.log("current page data: \n");
-        console.log(currPage);
-        if (
-          currPage &&
-          currPage.link &&
-          currPage.title &&
-          currPage.date &&
-          currPage.article
-        ) {
-          console.log("pushing current page");
-          currPage.siteName = name;
-          pageData.push(currPage);
-          currentLinks.push(...pageData.map((el) => el.link));
         }
 
-        if (pageCount >= saveAfter * saveCount) {
-          await saveDocuments(Model, pageData);
-          saveCount++;
+        try {
+          await scrollToBottom(page);
+        } catch {
+          console.log(
+            `Error when trying to scroll to bottom of page ${curr_url}`
+          );
         }
 
-        pageCount++;
+        if (waitUntil) {
+          try {
+            await page.waitForSelector(waitUntil.join(", "));
+          } catch (err) {
+            console.error(`Problem waiting for selector ${waitUntil}`);
+          }
+        }
+
+        console.log(`NAVIGATED TO ${curr_url}`);
+
+        try {
+          await page.waitForSelector(selector);
+        } catch (err) {
+          console.error(`Problem waiting for selector ${selector}`);
+        }
+
+        const links = await page.$$eval(selector, (links) =>
+          links.map((link) => link.href)
+        );
+
+        let pageCount = 1;
+        let saveCount = 1;
+        const totalPages = links.length;
+        for (let link of links) {
+          // checking if link is already fetched.
+          if (currentLinks.includes(link)) {
+            console.log("Link already fetched. Skipping link");
+            pageCount++;
+            continue;
+          } else console.log("Link not found. Fetching link");
+
+          console.log(`page ${pageCount} of ${totalPages}`);
+
+          const currPage = await getPageData(link, page, articlesWaitUntilVal, {
+            ...articleSelectors,
+          });
+          console.log("current page data: \n");
+          console.log(currPage);
+          if (
+            currPage &&
+            currPage.link &&
+            currPage.title &&
+            currPage.date &&
+            currPage.article
+          ) {
+            console.log("pushing current page");
+            currPage.siteName = name;
+            pageData.push(currPage);
+            currentLinks.push(...pageData.map((el) => el.link));
+          }
+
+          if (pageCount >= saveAfter * saveCount) {
+            await saveDocuments(Model, pageData);
+            saveCount++;
+          }
+
+          pageCount++;
+        }
+        await saveDocuments(Model, pageData);
       }
-      await saveDocuments(Model, pageData);
     }
-  }
 
-  await page.close();
-  await browser.close();
-  await saveDocuments(Model, pageData);
+    await page.close();
+    await browser.close();
+    await saveDocuments(Model, pageData);
+  } catch {
+    console.log("An error has occured when trying to fetch the page");
+  }
 };
 
 const getPageData = async (
