@@ -1,5 +1,5 @@
 import Agenda from "agenda";
-import config from "../config";
+import config from "../config/index.js";
 
 const db_uri = config.db;
 if (!db_uri) {

@@ -1,14 +1,11 @@
 import express from "express";
-import dotenv from "dotenv";
 import mongoose from "mongoose";
 import route from "./routes/index.js";
 import scrapeAllSitesJob from "./jobs/scrapeAllSites.js";
-
-dotenv.config();
-const PORT = process.env.PORT || 4000;
+import config from "./config/index.js";
 
 const app = express();
-mongoose.connect(process.env.MONGO_DEV_URI).then(() => {
+mongoose.connect(config.db).then(() => {
   console.log("Successfully connected to mongo server.");
 });
 
@@ -16,6 +13,8 @@ mongoose.connect(process.env.MONGO_DEV_URI).then(() => {
   await scrapeAllSitesJob();
 })();
 app.use("/", route);
+
+const PORT = config.port;
 
 app
   .listen(PORT, () => {
