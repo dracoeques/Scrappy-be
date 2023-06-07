@@ -9,5 +9,5 @@ agenda.define("scrape-all-sites", async (job) => {
 export default async () => {
   await agenda.start();
 
-  await agenda.every("1 day", "scrape-all-sites");
+  await agenda.every("6 hours", "scrape-all-sites");
 };
