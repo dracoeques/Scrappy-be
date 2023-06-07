@@ -6,7 +6,7 @@
   "main": "./src/index.js",
   "scripts": {
     "start:dev": "nodemon ./src/index.js",
-    "start:test": "nodemon ./src/index.js&&NODE_ENV=test",
+    "start:test": "node ./src/index.js&&NODE_ENV=test",
     "start:prod": "nodemon ./src/index.js"
   },
   "keywords": [
