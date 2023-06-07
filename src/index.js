@@ -7,11 +7,13 @@ import config from "./config/index.js";
 const app = express();
 mongoose.connect(config.db).then(() => {
   console.log("Successfully connected to mongo server.");
+  console.log(`connection uri ${config.db}}`);
 });
 
 (async () => {
   await scrapeAllSitesJob();
 })();
+
 app.use("/", route);
 
 const PORT = config.port;
