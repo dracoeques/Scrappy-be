@@ -127,8 +127,7 @@ export const getArticles = async (inputProps) => {
 
   await page.close();
   await browser.close();
-
-  await saveWithOverwrite(overwrite, currentSaved, pageData, name, csvDir);
+  await saveDocuments(Model, pageData);
 };
 
 const getPageData = async (
