@@ -19,6 +19,7 @@ export const getArticles = async (inputProps) => {
     } = inputProps;
     const currentSaved = await readSavedDocumnets(Model, name);
     const currentLinks = currentSaved.map((el) => el.link);
+    console.log(currentLinks);
 
     // making sure articleWaitUntil has a correct value
     const articlesWaitUntilVal =
@@ -115,20 +116,24 @@ export const getArticles = async (inputProps) => {
 
           if (pageCount >= saveAfter * saveCount) {
             await saveDocuments(Model, pageData);
+            // deleting all saved elements
+            pageData.splice(0, pageData.length);
             saveCount++;
           }
 
           pageCount++;
         }
         await saveDocuments(Model, pageData);
+        pageData.splice(0, pageData.length);
       }
     }
 
     await page.close();
     await browser.close();
     await saveDocuments(Model, pageData);
-  } catch {
+  } catch (err) {
     console.log("An error has occured when trying to fetch the page");
+    console.log(err);
   }
 };
 
