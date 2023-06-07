@@ -9,7 +9,7 @@ import harpersbazaar from "./harpersbazaar.js";
 import hyperallergic from "./hyperallergic.js";
 import refinery29 from "./refinery29.js";
 import theCut from "./theCut.js";
-import wMagazine from "./wmagazine..js";
+import wMagazine from "./wMagazine.js";
 
 const allArtAndFashion = [
   artNews,
