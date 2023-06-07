@@ -14,9 +14,7 @@ export const getArticles = async (inputProps) => {
     waitUntil,
     articlesWaitUntil = "domcontentloaded",
     Model,
-    takeScreenshot = false,
-    overwrite = false,
-    saveAfter = 50,
+    saveAfter = 1,
   } = inputProps;
   const currentSaved = await readSavedDocumnets(Model, name);
   const currentLinks = currentSaved.map((el) => el.link);
