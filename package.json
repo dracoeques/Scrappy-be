@@ -5,7 +5,9 @@
   "type": "module",
   "main": "./src/index.js",
   "scripts": {
-    "start": "nodemon ./src/index.js"
+    "start:dev": "nodemon ./src/index.js",
+    "start:test": "nodemon ./src/index.js&&NODE_ENV=test",
+    "start:prod": "nodemon ./src/index.js"
   },
   "keywords": [
     "scrapper",
