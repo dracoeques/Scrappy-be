@@ -29,6 +29,6 @@ app
     console.log(`Server running on port ${PORT}`);
   })
   .on("error", (err) => {
-    console.error(`Error running applicatoin: ${err}`);
+    console.error(`Error running application: ${err}`);
     process.exit(1);
   });
