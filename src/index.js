@@ -1,7 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import route from "./routes/index.js";
-import scrapeAllSitesJob from "./jobs/scrapeAllSites.js";
+// import scrapeAllSitesJob from "./jobs/scrapeAllSites.js";
 import config from "./config/index.js";
 
 const app = express();
