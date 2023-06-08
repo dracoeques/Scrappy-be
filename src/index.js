@@ -10,11 +10,17 @@ mongoose.connect(config.db).then(() => {
   console.log(`connection uri ${config.db}}`);
 });
 
-(async () => {
-  await scrapeAllSitesJob();
-})();
+// (async () => {
+//   await scrapeAllSitesJob();
+// })();
 
 app.use("/", route);
+app.use("/", (req, res, next) => {
+  res.status(404).json({
+    status: "error",
+    message: "page not found",
+  });
+});
 
 const PORT = config.port;
 
