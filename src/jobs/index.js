@@ -10,6 +10,8 @@ const agenda = new Agenda({
 });
 
 agenda.on("ready", () => console.log("Agenda started"));
-agenda.on("error", () => console.log("Error occured when starting agenda"));
+agenda.on("error", (err) =>
+  console.log(`Error occured when starting agenda\n ${err.message}`)
+);
 
 export default agenda;
