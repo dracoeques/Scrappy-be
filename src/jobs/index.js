@@ -9,7 +9,12 @@ const agenda = new Agenda({
   db: { address: db_uri, collection: "scrapper-jobs" },
 });
 
-agenda.on("ready", () => console.log("Agenda started"));
+agenda.on("ready", () => {
+  console.log("Agenda started");
+  await agenda.every("6 hours", "scrape-all-sites");
+  await agenda.start();
+
+});
 agenda.on("error", (err) =>
   console.log(`Error occured when starting agenda\n ${err.message}`)
 );
