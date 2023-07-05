@@ -1,5 +1,4 @@
 import { checkIsEntryFile } from "../../../utils/utils.js";
-
 import { getArticles } from "../../../utils/puppeteer/get-articles.js";
 import arsTechnica from "./arsTechnica.js";
 import cnet from "./cnet.js";
@@ -12,6 +11,15 @@ import theVerge from "./theVerge.js";
 import wired from "./wired.js";
 import popularScience from "./popularScience.js";
 import scienceDaily from "./scienceDaily.js";
+import mitTechnologyReview from "./mitTechnologyReview.js";
+import nature from "./nature.js";
+import science from "./science.js";
+import mashable from "./mashable.js";
+import ieeeSpectrum from "./ieeeSpectrum.js";
+import gizChina from "./gizChina.js";
+import ventureBeat from "./ventureBeat.js";
+import fastCompany from "./fastCompany.js";
+import techRadar from "./techRadar.js";
 
 const allScienceAndTech = [
   arsTechnica,
@@ -25,6 +33,14 @@ const allScienceAndTech = [
   techCrunch,
   theVerge,
   wired,
+  mitTechnologyReview,
+  nature,
+  science,
+  mashable,
+  ieeeSpectrum,
+  gizChina,
+  ventureBeat,
+  techRadar,
 ];
 
 export const getNews = async () => {
