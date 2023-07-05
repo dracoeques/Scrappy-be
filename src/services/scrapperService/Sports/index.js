@@ -1,5 +1,4 @@
 import { checkIsEntryFile } from "../../../utils/utils.js";
-
 import { getArticles } from "../../../utils/puppeteer/get-articles.js";
 import bbcSport from "./bbcSport.js";
 import bleacherReport from "./bleacherReport.js";
@@ -11,6 +10,14 @@ import skySport from "./skySport.js";
 import theAthletic from "./theAthletic.js";
 import yahooSports from "./yahooSports.js";
 import sbNation from "./sbNation.js";
+import theGuardianSport from "./theGuardianSport.js";
+import sportsNet from "./sportsNet.js";
+import euroSport from "./euroSport.js";
+import reutersSports from "./reutersSports.js";
+import aljazeeraSports from "./aljazeeraSports.js";
+import marca from "./marca.js";
+import theSydneyMorningHerald from "../politics/theSydneyMorningHerald.js";
+import nhkSports from "./nhkSports.js";
 
 const allSport = [
   bbcSport,
@@ -23,6 +30,14 @@ const allSport = [
   skySport,
   theAthletic,
   yahooSports,
+  theGuardianSport,
+  sportsNet,
+  euroSport,
+  reutersSports,
+  aljazeeraSports,
+  marca,
+  theSydneyMorningHerald,
+  nhkSports,
 ];
 
 export const getNews = async () => {
