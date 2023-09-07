@@ -18,7 +18,6 @@ import mashable from "./mashable.js";
 import ieeeSpectrum from "./ieeeSpectrum.js";
 import gizChina from "./gizChina.js";
 import ventureBeat from "./ventureBeat.js";
-import fastCompany from "./fastCompany.js";
 import techRadar from "./techRadar.js";
 
 const allScienceAndTech = [

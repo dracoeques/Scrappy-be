@@ -44,6 +44,13 @@ const allWeb3 = [
   theMerkle,
 ];
 
+export const getNews = async () => {
+  for (let web3 of allWeb3) {
+    await getArticles(web3
+      , 2);
+  }
+};
+
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
   if (!isEntryFile) return;

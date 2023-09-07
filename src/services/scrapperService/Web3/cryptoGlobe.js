@@ -1,5 +1,5 @@
-import { getArticles } from "../../get-articles.js";
-import { checkIsEntryFile } from "../../utils.js";
+import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const cryptoGlobe = {
   name: "cryptoGlobe",

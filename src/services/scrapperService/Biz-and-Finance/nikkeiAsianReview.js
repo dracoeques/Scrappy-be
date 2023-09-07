@@ -1,11 +1,15 @@
-import { getArticles } from "../../get-articles.js";
-import { checkIsEntryFile } from "../../utils.js";
+import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const nikkeiAsianReview = {
   name: "nikkeiAsianReview",
   saveDir: "Biz-and-Finance",
   url: "https://asia.nikkei.com/",
-  linkSelector: [".spotlight__title", ".article-block__content a", ".collection-article__title"],
+  linkSelector: [
+    ".spotlight__title",
+    ".article-block__content a",
+    ".collection-article__title",
+  ],
   articleSelectors: {
     titleSelector: [".article-header__title"],
     dateSelector: ["time", ".timestamp"],
