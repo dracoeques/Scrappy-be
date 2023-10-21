@@ -7,7 +7,9 @@
   "scripts": {
     "start:dev": "nodemon ./src/index.js",
     "start:test": "node ./src/index.js&&NODE_ENV=test",
-    "start:prod": "nodemon ./src/index.js"
+    "start:prod": "nodemon ./src/index.js",
+    "scrape": "node ./src/services/scrapperService/index.js",
+    "scrape:job": "node ./src/jobs/console.js"
   },
   "keywords": [
     "scrapper",
