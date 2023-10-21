@@ -1,14 +1,10 @@
 import express from "express";
-import mongoose from "mongoose";
 import route from "./routes/index.js";
 // import scrapeAllSitesJob from "./jobs/scrapeAllSites.js";
 import config from "./config/index.js";
+import mongoose from "./utils/mongoose.js";
 
 const app = express();
-mongoose.connect(config.db).then(() => {
-  console.log("Successfully connected to mongo server.");
-  console.log(`connection uri ${config.db}}`);
-});
 
 // (async () => {
 //   await scrapeAllSitesJob();

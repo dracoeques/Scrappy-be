@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from "../utils/mongoose.js";
 import baseFields from "./baseFields.js";
 const web3Schema = new mongoose.Schema({
   ...baseFields,
