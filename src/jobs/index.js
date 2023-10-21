@@ -1,5 +1,6 @@
 import Agenda from "agenda";
 import config from "../config/index.js";
+import mongoose from "../utils/mongoose.js";
 
 const db_uri = config.db;
 if (!db_uri) {
