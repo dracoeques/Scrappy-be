@@ -8,8 +8,8 @@
     "start:dev": "nodemon ./src/index.js",
     "start:test": "node ./src/index.js&&NODE_ENV=test",
     "start:prod": "nodemon ./src/index.js",
-    "scrape": "node ./src/services/scrapperService/index.js",
-    "scrape:job": "node ./src/jobs/console.js"
+    "scrape": "node ./src/scrapeAll.js",
+    "scrape:job": "node ./src/startJobs.js"
   },
   "keywords": [
     "scrapper",

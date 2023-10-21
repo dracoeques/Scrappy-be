@@ -1,15 +1,15 @@
-import agenda from "./index.js";
-import { getNews } from "../services/scrapperService/index.js";
-import { getNews as getArtAndFashion } from "../services/scrapperService/Art-and-Fashion/index.js";
-import { getNews as getBizAndFinance } from "../services/scrapperService/Biz-and-Finance/index.js";
-import { getNews as getEntertainment } from "../services/scrapperService/Entertainment/index.js";
-import { getNews as getGaming } from "../services/scrapperService/Gaming/index.js";
-import { getNews as getLawAndCrime } from "../services/scrapperService/Law-and-crime/index.js";
-import { getNews as getLifestyleAndHealth } from "../services/scrapperService/Lifestyle-and-health/index.js";
-import { getNews as getPolitics } from "../services/scrapperService/politics/index.js";
-import { getNews as getScienceAndTech } from "../services/scrapperService/Science-and-Tech/index.js";
-import { getNews as getSports } from "../services/scrapperService/Sports/index.js";
-import { getNews as getWeb3 } from "../services/scrapperService/Web3/index.js";
+import agenda from "./jobs/index.js";
+import { getNews } from "./services/scrapperService/index.js";
+import { getNews as getArtAndFashion } from "./services/scrapperService/Art-and-Fashion/index.js";
+import { getNews as getBizAndFinance } from "./services/scrapperService/Biz-and-Finance/index.js";
+import { getNews as getEntertainment } from "./services/scrapperService/Entertainment/index.js";
+import { getNews as getGaming } from "./services/scrapperService/Gaming/index.js";
+import { getNews as getLawAndCrime } from "./services/scrapperService/Law-and-crime/index.js";
+import { getNews as getLifestyleAndHealth } from "./services/scrapperService/Lifestyle-and-health/index.js";
+import { getNews as getPolitics } from "./services/scrapperService/politics/index.js";
+import { getNews as getScienceAndTech } from "./services/scrapperService/Science-and-Tech/index.js";
+import { getNews as getSports } from "./services/scrapperService/Sports/index.js";
+import { getNews as getWeb3 } from "./services/scrapperService/Web3/index.js";
 
 agenda.define("scrape-all-sites", async (job) => {
   console.log("job scrape-all-sites started working");
