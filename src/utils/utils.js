@@ -28,6 +28,18 @@ export const scrollToBottom = async (
   } while (curr_scroll !== new_scroll && curr_scroll_time < max_scroll_time);
 };
 
+export const currentDate = ( date=new Date() ) => {
+  // Get the current date components
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
+  const day = String(date.getUTCDate()).padStart(2, '0');
+
+  // Format the current date
+  const formattedDate = `${year}-${month}-${day}`;
+
+  return formattedDate;
+}
+
 /// mongoose helpers
 
 // function for saving documents to mongo
