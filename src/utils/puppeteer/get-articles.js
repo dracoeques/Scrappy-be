@@ -1,6 +1,7 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { readSavedDocumnets, saveDocuments, scrollToBottom } from "../utils.js";
+import { readSavedDocumnets, saveDocuments, scrollToBottom, currentDate } from "../utils.js";
+import mongoose from "../mongoose.js";
 
 puppeteer.use(StealthPlugin());
 
