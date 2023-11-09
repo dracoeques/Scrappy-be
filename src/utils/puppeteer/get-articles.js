@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
-import { readSavedDocumnets, saveDocuments, scrollToBottom, currentDate } from "../utils.js";
 import mongoose from "../mongoose.js";
+import { currentDate, readSavedDocumnets, saveDocuments, scrollToBottom } from "../utils.js";
 
 puppeteer.use(StealthPlugin());
 
@@ -18,6 +18,7 @@ export const getArticles = async (inputProps) => {
       Model,
       saveAfter = 1,
     } = inputProps;
+    if (Model == undefined) return;
     console.log(Model, Model.modelName)
     const model = new mongoose.model(Model.modelName + "." + currentDate(), Model.schema)
     
