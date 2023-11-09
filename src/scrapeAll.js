@@ -1,4 +1,4 @@
-import { getArticles } from "./utils/puppeteer/get-articles.js";
+import { exit } from "process";
 import allArtAndFashion from "./services/scrapperService/Art-and-Fashion/index.js";
 import allBizAndFinance from "./services/scrapperService/Biz-and-Finance/index.js";
 import allEntertainment from "./services/scrapperService/Entertainment/index.js";
@@ -9,6 +9,7 @@ import allScienceAndTech from "./services/scrapperService/Science-and-Tech/index
 import allSport from "./services/scrapperService/Sports/index.js";
 import allWeb3 from "./services/scrapperService/Web3/index.js";
 import allPolitics from "./services/scrapperService/politics/index.js";
+import { getArticles } from "./utils/puppeteer/get-articles.js";
 import { checkIsEntryFile } from "./utils/utils.js";
 
 const allArticles = [
@@ -35,6 +36,7 @@ export const getNews = async () => {
   for (let article of allArticles) {
     await getArticles(article, 1);
   }
+  exit(0);
 })();
 
 export default allArticles;
