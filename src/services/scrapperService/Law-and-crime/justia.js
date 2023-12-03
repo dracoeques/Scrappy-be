@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LawAndCrime from "../../../models/lawAndCrime.js";
@@ -29,7 +29,7 @@ const justia = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(justia, 2);
+  if (isEntryFile) await getArticles(justia);
 })();
 
 export default justia;

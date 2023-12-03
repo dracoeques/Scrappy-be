@@ -1,5 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import bloomberg from "./bloomberg.js";
 import businessInsider from "./businessInsider.js";
 import cnbc from "./cnbc.js";
@@ -47,18 +46,11 @@ const allBizAndFinance = [
 ];
 
 export const getNews = async () => {
-  for (let BizAndFinance of allBizAndFinance) {
-    await getArticles(BizAndFinance, 2);
-  }
+  await clusterScrape(import.meta.url, allBizAndFinance);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-
-  for (let BizAndFinance of allBizAndFinance) {
-    await getArticles(BizAndFinance, 2);
-  }
+  await clusterScrape(import.meta.url, allBizAndFinance);
 })();
 
 export default allBizAndFinance;

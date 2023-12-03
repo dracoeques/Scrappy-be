@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const southChinaMorningPost = {
@@ -27,7 +27,7 @@ const southChinaMorningPost = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(southChinaMorningPost, 2);
+  if (isEntryFile) await getArticles(southChinaMorningPost);
 })();
 
 export default southChinaMorningPost;

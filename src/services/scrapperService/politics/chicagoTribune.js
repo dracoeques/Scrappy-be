@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const chicagoTribune = {
@@ -16,7 +16,7 @@ const chicagoTribune = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(chicagoTribune, 2);
+  if (isEntryFile) await getArticles(chicagoTribune);
 })();
 
 export default chicagoTribune;

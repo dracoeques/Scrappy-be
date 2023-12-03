@@ -1,5 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import bbcSport from "./bbcSport.js";
 import bleacherReport from "./bleacherReport.js";
 import cbsSports from "./cbsSports.js";
@@ -41,17 +40,11 @@ const allSport = [
 ];
 
 export const getNews = async () => {
-  for (let sport of allSport) {
-    await getArticles(sport, 2);
-  }
+  await clusterScrape(import.meta.url, allSport);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let sport of allSport) {
-    await getArticles(sport, 2);
-  }
+  await clusterScrape(import.meta.url, allSport);
 })();
 
 export default allSport;

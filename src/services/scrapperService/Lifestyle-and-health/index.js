@@ -1,6 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import everydayHealth from "./everydayHealth.js";
 import health from "./health.js";
 import healthline from "./healthline.js";
@@ -26,17 +24,11 @@ const allLifestyleAndHealth = [
 ];
 
 export const getNews = async () => {
-  for (let LifestyleAndHealth of allLifestyleAndHealth) {
-    await getArticles(LifestyleAndHealth, 2);
-  }
+  await clusterScrape(import.meta.url, allLifestyleAndHealth);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let LifestyleAndHealth of allLifestyleAndHealth) {
-    await getArticles(LifestyleAndHealth, 2);
-  }
+  await clusterScrape(import.meta.url, allLifestyleAndHealth);
 })();
 
 export default allLifestyleAndHealth;

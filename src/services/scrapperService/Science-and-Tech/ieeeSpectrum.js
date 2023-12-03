@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const ieeeSpectrum = {
@@ -21,7 +21,7 @@ const ieeeSpectrum = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(ieeeSpectrum, 2);
+  if (isEntryFile) await getArticles(ieeeSpectrum);
 })();
 
 export default ieeeSpectrum;

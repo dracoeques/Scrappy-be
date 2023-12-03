@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const caixinGlobal = {
@@ -16,7 +16,7 @@ const caixinGlobal = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(caixinGlobal, 2);
+  if (isEntryFile) await getArticles(caixinGlobal);
 })();
 
 export default caixinGlobal;

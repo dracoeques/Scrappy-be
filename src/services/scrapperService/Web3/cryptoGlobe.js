@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const cryptoGlobe = {
@@ -20,7 +20,7 @@ const cryptoGlobe = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(cryptoGlobe, 2);
+  if (isEntryFile) await getArticles(cryptoGlobe);
 })();
 
 export default cryptoGlobe;

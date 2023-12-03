@@ -1,6 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import alJazeera from "./alJazeera.js";
 import bbc from "./bbc.js";
 import cnn from "./cnn.js";
@@ -48,18 +46,11 @@ const allPolitics = [
 ];
 
 export const getNews = async () => {
-  for (let politics of allPolitics) {
-    await getArticles(politics, 2);
-  }
+  await clusterScrape(import.meta.url, allPolitics);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-
-  for (let politics of allPolitics) {
-    await getArticles(politics, 2);
-  }
+  await clusterScrape(import.meta.url, allPolitics);
 })();
 
 export default allPolitics;

@@ -1,5 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import vogue from "./vogue.js";
 import artNews from "./artNews.js";
 import artsy from "./artsy.js";
@@ -25,18 +24,11 @@ const allArtAndFashion = [
 ];
 
 export const getNews = async () => {
-  for (let artAndFashion of allArtAndFashion) {
-    await getArticles(artAndFashion, 2);
-  }
+  await clusterScrape(import.meta.url, allArtAndFashion);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-
-  for (let artAndFashion of allArtAndFashion) {
-    await getArticles(artAndFashion, 2);
-  }
+  await clusterScrape(import.meta.url, allArtAndFashion);
 })();
 
 export default allArtAndFashion;

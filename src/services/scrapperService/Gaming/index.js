@@ -1,6 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import destructoid from "./destructoid.js";
 import euroGamer from "./euroGamer.js";
 import gameInformer from "./gameInformer.js";
@@ -25,17 +23,11 @@ const allGaming = [
   vg247,
 ];
 export const getNews = async () => {
-  for (let gaming of allGaming) {
-    await getArticles(gaming, 2);
-  }
+  await clusterScrape(import.meta.url, allGaming);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let gaming of allGaming) {
-    await getArticles(gaming, 2);
-  }
+  await clusterScrape(import.meta.url, allGaming);
 })();
 
 export default allGaming;
