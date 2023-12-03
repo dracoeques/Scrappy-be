@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LifestyleAndHealth from "../../../models/lifestyleAndHealth.js";
@@ -33,7 +33,7 @@ const womensHealth = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(womensHealth, 2);
+  if (isEntryFile) await getArticles(womensHealth);
 })();
 
 export default womensHealth;

@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Entertainment from "../../../models/entertainment.js";
@@ -17,13 +17,13 @@ const popSugar = {
 };
 
 export const getNews = async () => {
-  const res = await getArticles(popSugar, 2);
+  const res = await getArticles(popSugar);
   return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(popSugar, 2);
+  if (isEntryFile) await getArticles(popSugar);
 })();
 
 export default popSugar;

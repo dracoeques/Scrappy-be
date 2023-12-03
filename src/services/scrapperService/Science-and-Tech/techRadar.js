@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const techRadar = {
@@ -21,7 +21,7 @@ const techRadar = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(techRadar, 2);
+  if (isEntryFile) await getArticles(techRadar);
 })();
 
 export default techRadar;

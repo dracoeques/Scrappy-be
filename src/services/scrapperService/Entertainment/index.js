@@ -1,6 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import deadline from "./deadline.js";
 import eNews from "./eNews.js";
 import entertainmentWeekly from "./entertainmentWeekly.js";
@@ -24,17 +22,11 @@ const allEntertainment = [
 ];
 
 export const getNews = async () => {
-  for (let entertainment of allEntertainment) {
-    await getArticles(entertainment, 2);
-  }
+  await clusterScrape(import.meta.url, allEntertainment);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let entertainment of allEntertainment) {
-    await getArticles(entertainment, 2);
-  }
+  await clusterScrape(import.meta.url, allEntertainment);
 })();
 
 export default allEntertainment;

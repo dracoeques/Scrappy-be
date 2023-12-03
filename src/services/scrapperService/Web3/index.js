@@ -1,5 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import blockonomi from "./blockonomi.js";
 import braveNewCoin from "./braveNewCoin.js";
 import coinDesk from "./coinDesk.js";
@@ -45,18 +44,11 @@ const allWeb3 = [
 ];
 
 export const getNews = async () => {
-  for (let web3 of allWeb3) {
-    await getArticles(web3
-      , 2);
-  }
+  await clusterScrape(import.meta.url, allWeb3);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let web3 of allWeb3) {
-    await getArticles(web3, 2);
-  }
+  await clusterScrape(import.meta.url, allWeb3);
 })();
 
 export default allWeb3;

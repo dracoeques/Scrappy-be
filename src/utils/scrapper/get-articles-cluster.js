@@ -1,11 +1,23 @@
 import puppeteer from "puppeteer-extra";
 import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import mongoose from "../mongoose.js";
-import { currentDate, readSavedDocumnets, saveDocuments, scrollToBottom } from "../utils.js";
+import {
+  currentDate,
+  readSavedDocumnets,
+  saveDocuments,
+  scrollToBottom,
+} from "../utils.js";
 
 puppeteer.use(StealthPlugin());
 
-export const getArticles = async (inputProps) => {
+// const cluster = await Cluster.launch({
+//   concurrency: Cluster.CONCURRENCY_BROWSER,
+//   maxConcurrency: 10,
+// });
+
+// cluster.task(async ({ page, data }) => {});
+
+export const getArticles = async (inputProps, page) => {
   try {
     if (!inputProps) return;
     const {
@@ -19,11 +31,21 @@ export const getArticles = async (inputProps) => {
       saveAfter = 1,
     } = inputProps;
     if (Model == undefined) return;
-    console.log(Model, Model.modelName)
-    const model = new mongoose.model(Model.modelName + "." + currentDate(), Model.schema)
-    
-    const currentSaved = await readSavedDocumnets(model, name);
-    const currentLinks = currentSaved.map((el) => el.link);
+    console.log(Model, Model.modelName);
+    const model = new mongoose.model(
+      Model.modelName + "." + currentDate(),
+      Model.schema
+    );
+    let currentSaved;
+    let currentLinks;
+    // let page;
+    try {
+      currentSaved = await readSavedDocumnets(model, name);
+    } catch (err) {
+      console.log("An error occured when trying to fetch links.");
+      console.log(err);
+    }
+    if (currentSaved) currentLinks = currentSaved.map((el) => el.link);
     console.log(currentLinks);
 
     // making sure articleWaitUntil has a correct value
@@ -34,13 +56,12 @@ export const getArticles = async (inputProps) => {
       articlesWaitUntil !== "load"
         ? "domcontentloaded"
         : articlesWaitUntil;
+    // const browser = await puppeteer.launch({
+    //   headless: true,
+    // });
 
-    const browser = await puppeteer.launch({
-      headless: true,
-    });
-
-    // create a page and set its viewport
-    const page = await browser.newPage();
+    // // create a page and set its viewport
+    // const page = await browser.newPage();
     await page.setViewport({ width: 1000, height: 6000 });
 
     // navigate to url and wait for it to load
@@ -53,7 +74,7 @@ export const getArticles = async (inputProps) => {
         try {
           await page.goto(curr_url, {
             waitUntil: "domcontentloaded",
-            timeout: 0,
+            timeout: 75000,
           });
         } catch {
           console.error(`Error navigating to link ${curr_url}.`);
@@ -134,7 +155,7 @@ export const getArticles = async (inputProps) => {
     }
 
     await page.close();
-    await browser.close();
+    // await browser.close();
     await saveDocuments(model, pageData);
   } catch (err) {
     console.log("An error has occured when trying to fetch the page");

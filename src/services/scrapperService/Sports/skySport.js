@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Sports from "../../../models/sports.js";
@@ -23,7 +23,7 @@ const skySport = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(skySport, 2);
+  if (isEntryFile) await getArticles(skySport);
 })();
 
 export default skySport;

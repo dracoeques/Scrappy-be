@@ -1,6 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import aboveTheLaw from "./aboveTheLaw.js";
 import courthouseNewsService from "./courthouseNewsService.js";
 import crimeOnline from "./crimeOnline.js";
@@ -28,17 +26,11 @@ const allLaw = [
 ];
 
 export const getNews = async () => {
-  for (let law of allLaw) {
-    await getArticles(law, 2);
-  }
+  await clusterScrape(import.meta.url, allLaw);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let law of allLaw) {
-    await getArticles(law, 2);
-  }
+  await clusterScrape(import.meta.url, allLaw);
 })();
 
 export default allLaw;

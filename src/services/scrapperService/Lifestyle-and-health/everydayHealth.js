@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LifestyleAndHealth from "../../../models/lifestyleAndHealth.js";
@@ -34,7 +34,7 @@ const everydayHealth = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(everydayHealth, 2);
+  if (isEntryFile) await getArticles(everydayHealth);
 })();
 
 export default everydayHealth;

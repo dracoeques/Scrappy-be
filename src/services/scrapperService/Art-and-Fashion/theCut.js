@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import ArtAndFashion from "../../../models/artAndFashion.js";
@@ -24,13 +24,13 @@ const theCut = {
   },
 };
 export const getNews = async () => {
-  const res = await getArticles(theCut, 2);
+  const res = await getArticles(theCut);
   return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theCut, 2);
+  if (isEntryFile) await getArticles(theCut);
 })();
 
 export default theCut;

@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Politics from "../../../models/politics.js";
@@ -18,7 +18,7 @@ const reuters = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(reuters, 2);
+  if (isEntryFile) await getArticles(reuters);
 })();
 
 export default reuters;

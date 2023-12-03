@@ -1,5 +1,4 @@
-import { checkIsEntryFile } from "../../../utils/utils.js";
-import { getArticles } from "../../../utils/puppeteer/get-articles.js";
+import clusterScrape from "../../../utils/scrapper/scrape-category.js";
 import arsTechnica from "./arsTechnica.js";
 import cnet from "./cnet.js";
 import engadget from "./engadget.js";
@@ -43,17 +42,11 @@ const allScienceAndTech = [
 ];
 
 export const getNews = async () => {
-  for (let ScienceAndTech of allScienceAndTech) {
-    await getArticles(ScienceAndTech, 2);
-  }
+  await clusterScrape(import.meta.url, allScienceAndTech);
 };
 
 (async () => {
-  const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (!isEntryFile) return;
-  for (let ScienceAndTech of allScienceAndTech) {
-    await getArticles(ScienceAndTech, 2);
-  }
+  await clusterScrape(import.meta.url, allScienceAndTech);
 })();
 
 export default allScienceAndTech;
