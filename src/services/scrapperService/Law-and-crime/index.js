@@ -30,7 +30,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allLaw);
+  await clusterScrape(import.meta.url, allLaw, true);
 })();
 
 export default allLaw;

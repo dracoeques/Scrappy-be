@@ -44,7 +44,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allSport);
+  await clusterScrape(import.meta.url, allSport, true);
 })();
 
 export default allSport;

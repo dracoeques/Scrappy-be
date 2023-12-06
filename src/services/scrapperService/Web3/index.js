@@ -48,7 +48,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allWeb3);
+  await clusterScrape(import.meta.url, allWeb3, true);
 })();
 
 export default allWeb3;

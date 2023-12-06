@@ -27,7 +27,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allGaming);
+  await clusterScrape(import.meta.url, allGaming, true);
 })();
 
 export default allGaming;

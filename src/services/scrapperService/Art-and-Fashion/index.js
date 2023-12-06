@@ -28,7 +28,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allArtAndFashion);
+  await clusterScrape(import.meta.url, allArtAndFashion, true);
 })();
 
 export default allArtAndFashion;

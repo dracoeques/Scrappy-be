@@ -50,7 +50,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allBizAndFinance);
+  await clusterScrape(import.meta.url, allBizAndFinance, true);
 })();
 
 export default allBizAndFinance;

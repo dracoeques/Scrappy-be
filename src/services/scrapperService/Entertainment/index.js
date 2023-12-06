@@ -26,7 +26,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allEntertainment);
+  await clusterScrape(import.meta.url, allEntertainment, true);
 })();
 
 export default allEntertainment;
