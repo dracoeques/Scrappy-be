@@ -22,11 +22,18 @@ const allEntertainment = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allEntertainment);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allEntertainment,
+  });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allEntertainment, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allEntertainment,
+    checkEntryFile: true,
+  });
 })();
 
 export default allEntertainment;

@@ -23,11 +23,15 @@ const allGaming = [
   vg247,
 ];
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allGaming);
+  await clusterScrape({ filepath: import.meta.url, articles: allGaming });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allGaming, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allGaming,
+    checkEntryFile: true,
+  });
 })();
 
 export default allGaming;

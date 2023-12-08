@@ -46,11 +46,18 @@ const allBizAndFinance = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allBizAndFinance);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allBizAndFinance,
+  });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allBizAndFinance, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allBizAndFinance,
+    checkEntryFile: true,
+  });
 })();
 
 export default allBizAndFinance;

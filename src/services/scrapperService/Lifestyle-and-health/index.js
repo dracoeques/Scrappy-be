@@ -24,11 +24,18 @@ const allLifestyleAndHealth = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allLifestyleAndHealth);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allLifestyleAndHealth,
+  });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allLifestyleAndHealth, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allLifestyleAndHealth,
+    checkEntryFile: true,
+  });
 })();
 
 export default allLifestyleAndHealth;

@@ -26,11 +26,15 @@ const allLaw = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allLaw);
+  await clusterScrape({ filepath: import.meta.url, articles: allLaw });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allLaw, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allLaw,
+    checkEntryFile: true,
+  });
 })();
 
 export default allLaw;

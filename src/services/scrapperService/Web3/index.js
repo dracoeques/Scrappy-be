@@ -44,11 +44,15 @@ const allWeb3 = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allWeb3);
+  await clusterScrape({ filepath: import.meta.url, articles: allWeb3 });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allWeb3, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allWeb3,
+    checkEntryFile: true,
+  });
 })();
 
 export default allWeb3;

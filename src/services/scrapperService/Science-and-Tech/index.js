@@ -42,11 +42,18 @@ const allScienceAndTech = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allScienceAndTech);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allScienceAndTech,
+  });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allScienceAndTech, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allScienceAndTech,
+    checkEntryFile: true,
+  });
 })();
 
 export default allScienceAndTech;

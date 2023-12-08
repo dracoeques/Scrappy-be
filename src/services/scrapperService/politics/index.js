@@ -46,11 +46,15 @@ const allPolitics = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allPolitics);
+  await clusterScrape({ filepath: import.meta.url, articles: allPolitics });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allPolitics, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allPolitics,
+    checkEntryFile: true,
+  });
 })();
 
 export default allPolitics;

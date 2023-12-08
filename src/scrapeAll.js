@@ -24,12 +24,18 @@ const allArticles = [
   ...allWeb3,
 ];
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allArticles);
+  await clusterScrape({ filepath: import.meta.url, articles: allArticles });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allArticles, true);
-  exit(0);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allArticles,
+    checkEntryFile: true,
+    concurrencyLevel: "context",
+    maxConcurrency: 10,
+  });
+  // exit(0);
 })();
 
 export default allArticles;

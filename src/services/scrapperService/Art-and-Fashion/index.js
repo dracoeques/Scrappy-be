@@ -24,11 +24,18 @@ const allArtAndFashion = [
 ];
 
 export const getNews = async () => {
-  await clusterScrape(import.meta.url, allArtAndFashion);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allArtAndFashion,
+  });
 };
 
 (async () => {
-  await clusterScrape(import.meta.url, allArtAndFashion, true);
+  await clusterScrape({
+    filepath: import.meta.url,
+    articles: allArtAndFashion,
+    checkEntryFile: true,
+  });
 })();
 
 export default allArtAndFashion;
