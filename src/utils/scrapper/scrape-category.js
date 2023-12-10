@@ -30,6 +30,7 @@ const clusterScrape = async function ({
     retryLimit: 10,
     puppeteer: puppeteer,
     timeout: 750000,
+    monitor: true,
   });
   console.log(`Max concurrency: ${maxConcurrency}`);
   console.log(`Concurrency level: ${concurrencyMap[concurrencyLevel]}`);
