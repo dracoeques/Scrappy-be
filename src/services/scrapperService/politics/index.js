@@ -1,4 +1,5 @@
 import clusterScrape from "../../../utils/scrapper/scrape-category.js";
+import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
 import alJazeera from "./alJazeera.js";
 import bbc from "./bbc.js";
 import cnn from "./cnn.js";
@@ -50,10 +51,14 @@ export const getNews = async () => {
 };
 
 (async () => {
+  if (!checkIsEntryFile(import.meta.url)) return;
+  const { maxConcurency, concurencyLevel } = getArgs();
   await clusterScrape({
     filepath: import.meta.url,
     articles: allPolitics,
     checkEntryFile: true,
+    maxConcurrency: maxConcurency,
+    concurrencyLevel: concurencyLevel,
   });
 })();
 

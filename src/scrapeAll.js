@@ -10,6 +10,7 @@ import allScienceAndTech from "./services/scrapperService/Science-and-Tech/index
 import allSport from "./services/scrapperService/Sports/index.js";
 import allWeb3 from "./services/scrapperService/Web3/index.js";
 import allPolitics from "./services/scrapperService/politics/index.js";
+import { checkIsEntryFile, getArgs } from "./utils/utils.js";
 
 const allArticles = [
   ...allArtAndFashion,
@@ -28,12 +29,14 @@ export const getNews = async () => {
 };
 
 (async () => {
+  if (!checkIsEntryFile(import.meta.url)) return;
+  const { maxConcurency, concurencyLevel } = getArgs();
   await clusterScrape({
     filepath: import.meta.url,
     articles: allArticles,
-    checkEntryFile: true,
-    concurrencyLevel: "context",
-    maxConcurrency: 10,
+    checkEntryFile: false,
+    maxConcurrency: maxConcurency,
+    concurrencyLevel: concurencyLevel,
   });
   // exit(0);
 })();

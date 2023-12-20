@@ -3,6 +3,7 @@ import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import mongoose from "../mongoose.js";
 import {
   currentDate,
+  isWithinRange,
   readSavedDocumnets,
   saveDocuments,
   scrollToBottom,
@@ -125,6 +126,7 @@ export const getArticles = async (inputProps) => {
             currPage.link &&
             currPage.title &&
             currPage.date &&
+            isWithinRange(currPage.date) &&
             currPage.article
           ) {
             console.log("pushing current page");

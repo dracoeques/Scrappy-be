@@ -1,4 +1,5 @@
 import clusterScrape from "../../../utils/scrapper/scrape-category.js";
+import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
 import bbcSport from "./bbcSport.js";
 import bleacherReport from "./bleacherReport.js";
 import cbsSports from "./cbsSports.js";
@@ -44,10 +45,15 @@ export const getNews = async () => {
 };
 
 (async () => {
+  if (!checkIsEntryFile(import.meta.url)) return;
+  const { maxConcurency, concurencyLevel } = getArgs();
+
   await clusterScrape({
     filepath: import.meta.url,
     articles: allSport,
     checkEntryFile: true,
+    maxConcurrency: maxConcurency,
+    concurrencyLevel: concurencyLevel,
   });
 })();
 

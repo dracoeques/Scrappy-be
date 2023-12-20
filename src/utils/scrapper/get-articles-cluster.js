@@ -19,7 +19,7 @@ puppeteer.use(StealthPlugin());
 
 export const getArticles = async (inputProps, page) => {
   try {
-    if (!inputProps) return;
+    if (!inputProps || !page) return;
     const {
       name,
       url,

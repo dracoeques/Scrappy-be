@@ -1,4 +1,5 @@
 import clusterScrape from "../../../utils/scrapper/scrape-category.js";
+import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
 import everydayHealth from "./everydayHealth.js";
 import health from "./health.js";
 import healthline from "./healthline.js";
@@ -31,10 +32,14 @@ export const getNews = async () => {
 };
 
 (async () => {
+  if (!checkIsEntryFile(import.meta.url)) return;
+  const { maxConcurency, concurencyLevel } = getArgs();
   await clusterScrape({
     filepath: import.meta.url,
     articles: allLifestyleAndHealth,
     checkEntryFile: true,
+    maxConcurrency: maxConcurency,
+    concurrencyLevel: concurencyLevel,
   });
 })();
 

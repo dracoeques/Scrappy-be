@@ -1,4 +1,5 @@
 import clusterScrape from "../../../utils/scrapper/scrape-category.js";
+import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
 import arsTechnica from "./arsTechnica.js";
 import cnet from "./cnet.js";
 import engadget from "./engadget.js";
@@ -49,10 +50,15 @@ export const getNews = async () => {
 };
 
 (async () => {
+  if (!checkIsEntryFile(import.meta.url)) return;
+  const { maxConcurency, concurencyLevel } = getArgs();
+
   await clusterScrape({
     filepath: import.meta.url,
     articles: allScienceAndTech,
     checkEntryFile: true,
+    maxConcurrency: maxConcurency,
+    concurrencyLevel: concurencyLevel,
   });
 })();
 

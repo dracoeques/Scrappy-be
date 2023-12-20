@@ -1,5 +1,6 @@
 import { promisify } from "util";
 import { fileURLToPath } from "url";
+import moment from "moment";
 
 /// puppeteer helpers
 
@@ -28,17 +29,17 @@ export const scrollToBottom = async (
   } while (curr_scroll !== new_scroll && curr_scroll_time < max_scroll_time);
 };
 
-export const currentDate = ( date=new Date() ) => {
+export const currentDate = (date = new Date()) => {
   // Get the current date components
   const year = date.getUTCFullYear();
-  const month = String(date.getUTCMonth() + 1).padStart(2, '0');
-  const day = String(date.getUTCDate()).padStart(2, '0');
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
 
   // Format the current date
   const formattedDate = `${year}-${month}-${day}`;
 
   return formattedDate;
-}
+};
 
 /// mongoose helpers
 
@@ -76,4 +77,32 @@ export const checkIsEntryFile = (filename) => {
   const entryFile = process.argv[1];
 
   return entryFile === cleanFileName;
+};
+
+const isDate = (input) => {
+  if (Object.prototype.toString.call(input) === "[object Date]") return true;
+  return false;
+};
+
+export const isWithinRange = (currDate, daysToSubtract = 7) => {
+  console.log(moment().subtract(7, "days").unix());
+  const date = new Date(currDate);
+  if (isNaN(date) || !isDate(date)) return true;
+  const passedDate = date.getTime();
+  const endDate = new Date().getTime() - daysToSubtract * 24 * 60 * 60 * 1000;
+  if (passedDate < endDate) return false;
+  return true;
+};
+
+export const getArgs = () => {
+  let args = process.argv;
+  const params = { maxConcurency: null, concurencyLevel: null };
+  args.splice(0, 2);
+  for (let arg of args) {
+    if (arg.includes("max-concurrency")) {
+      params.maxConcurency = +arg.split("=")[1];
+    } else if (arg.includes("concurrency-level"))
+      params.concurencyLevel = arg.split("=")[1];
+  }
+  return params;
 };
