@@ -24,5 +24,4 @@ switch (ENVIRONMENT) {
     config.port = process.env.TEST_PORT;
     break;
 }
-
 export default config;

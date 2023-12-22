@@ -38,7 +38,7 @@ export const getNews = async () => {
     maxConcurrency: maxConcurency,
     concurrencyLevel: concurencyLevel,
   });
-  // exit(0);
+  exit(0);
 })();
 
 export default allArticles;

@@ -1,6 +1,5 @@
 import { promisify } from "util";
 import { fileURLToPath } from "url";
-import moment from "moment";
 
 /// puppeteer helpers
 
@@ -85,7 +84,6 @@ const isDate = (input) => {
 };
 
 export const isWithinRange = (currDate, daysToSubtract = 7) => {
-  console.log(moment().subtract(7, "days").unix());
   const date = new Date(currDate);
   if (isNaN(date) || !isDate(date)) return true;
   const passedDate = date.getTime();
@@ -95,7 +93,7 @@ export const isWithinRange = (currDate, daysToSubtract = 7) => {
 };
 
 export const getArgs = () => {
-  let args = process.argv;
+  let args = [...process.argv];
   const params = { maxConcurency: null, concurencyLevel: null };
   args.splice(0, 2);
   for (let arg of args) {

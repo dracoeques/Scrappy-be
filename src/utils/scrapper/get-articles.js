@@ -108,7 +108,7 @@ export const getArticles = async (inputProps) => {
         const totalPages = links.length;
         for (let link of links) {
           // checking if link is already fetched.
-          if (currentLinks.includes(link)) {
+          if (currentLinks && currentLinks.includes(link)) {
             console.log("Link already fetched. Skipping link");
             pageCount++;
             continue;
