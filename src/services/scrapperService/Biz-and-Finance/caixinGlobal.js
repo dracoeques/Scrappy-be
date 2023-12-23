@@ -1,9 +1,10 @@
 import { getArticles } from "../../../utils/scrapper/get-articles.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import BizAndFinance from "../../../models/bizAndFinance.js";
 
 const caixinGlobal = {
   name: "caixinGlobal",
-  saveDir: "Biz-and-Finance",
+  Model: BizAndFinance,
   url: "https://www.caixinglobal.com/",
   linkSelector: ["dd a"],
   articleSelectors: {

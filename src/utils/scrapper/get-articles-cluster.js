@@ -1,5 +1,5 @@
-import puppeteer from "puppeteer-extra";
-import StealthPlugin from "puppeteer-extra-plugin-stealth";
+// import puppeteer from "puppeteer-extra";
+// import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import mongoose from "../mongoose.js";
 import {
   currentDate,
@@ -8,7 +8,7 @@ import {
   scrollToBottom,
 } from "../utils.js";
 
-puppeteer.use(StealthPlugin());
+// puppeteer.use(StealthPlugin());
 
 // const cluster = await Cluster.launch({
 //   concurrency: Cluster.CONCURRENCY_BROWSER,
