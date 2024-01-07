@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Politics from "../../../models/politics.js";
 
 const theJapanTimes = {
   name: "theJapanTimes",
-  saveDir: "politics",
+  Model: Politics,
   url: "https://www.japantimes.co.jp/",
   linkSelector: [".wrapper-link", ".index-loop-article a"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const theJapanTimes = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theJapanTimes);
+  if (isEntryFile)
+    await singleScrape({
+      article: theJapanTimes,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theJapanTimes;

@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import ScienceAndTech from "../../../models/scienceAndTech.js";
@@ -21,7 +21,12 @@ const theVerge = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theVerge);
+  if (isEntryFile)
+    await singleScrape({
+      article: theVerge,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theVerge;

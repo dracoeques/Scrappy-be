@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import LifestyleAndHealth from "../../../models/lifestyleAndHealth.js";
 
 const shape = {
   name: "shape",
-  saveDir: "Lifestyle-and-shape",
+  Model: LifestyleAndHealth,
   url: "https://www.shape.com/",
   linkSelector: ["a.card"],
   articleSelectors: {
@@ -26,7 +27,12 @@ const shape = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(shape);
+  if (isEntryFile)
+    await singleScrape({
+      article: shape,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default shape;

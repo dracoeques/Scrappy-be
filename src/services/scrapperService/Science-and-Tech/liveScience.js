@@ -1,6 +1,5 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
-
 import ScienceAndTech from "../../../models/scienceAndTech.js";
 
 const liveScience = {
@@ -18,7 +17,12 @@ const liveScience = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(liveScience);
+  if (isEntryFile)
+    await singleScrape({
+      article: liveScience,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default liveScience;

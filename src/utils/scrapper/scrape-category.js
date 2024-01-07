@@ -1,15 +1,19 @@
 import clusterScrape from "./cluster-scrape.js";
-import { getArticles } from "./get-articles.js";
 import { checkIsEntryFile, getArgs, printHighlightedText } from "../utils.js";
+import { singleScrape } from "./single-scrape.js";
 
 export const scrapeCategory = async (articles, filePath) => {
   if (!checkIsEntryFile(filePath)) return false;
 
-  const { maxConcurrency, concurrencyLevel, mode } = getArgs();
+  const { mode } = getArgs();
   if (mode === "legacy") {
     printHighlightedText("RUNNING IN LEGACY MODE");
     for (let article of articles) {
-      await getArticles(article);
+      await singleScrape({
+        article: article,
+        filepath: filePath,
+        checkEntryFile: true,
+      });
     }
   } else if (mode === "cluster") {
     printHighlightedText("RUNNING IN CLUSTER MODE");
@@ -17,8 +21,6 @@ export const scrapeCategory = async (articles, filePath) => {
       filepath: filePath,
       articles: articles,
       checkEntryFile: true,
-      maxConcurrency: maxConcurrency,
-      concurrencyLevel: concurrencyLevel,
     });
   }
 };

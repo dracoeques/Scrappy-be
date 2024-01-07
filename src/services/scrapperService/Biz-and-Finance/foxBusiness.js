@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 import BizAndFinance from "../../../models/bizAndFinance.js";
 
@@ -17,7 +17,12 @@ const foxBusiness = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(foxBusiness);
+  if (isEntryFile)
+    await singleScrape({
+      article: foxBusiness,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default foxBusiness;

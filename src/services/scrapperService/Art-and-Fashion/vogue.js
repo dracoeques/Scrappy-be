@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import ArtAndFashion from "../../../models/artAndFashion.js";
@@ -16,13 +16,22 @@ const vogue = {
   },
 };
 export const getNews = async () => {
-  const res = await getArticles(vogue);
+  const res = await singleScrape({
+    article: vogue,
+    filepath: import.meta.url,
+    checkEntryFile: false,
+  });
   return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(vogue);
+  if (isEntryFile)
+    await singleScrape({
+      article: vogue,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default vogue;

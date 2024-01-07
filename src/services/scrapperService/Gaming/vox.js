@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Gaming from "../../../models/gaming.js";
@@ -22,7 +22,12 @@ const vox = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(vox);
+  if (isEntryFile)
+    await singleScrape({
+      article: vox,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default vox;

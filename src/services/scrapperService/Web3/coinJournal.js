@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Web3 from "../../../models/web3.js";
 
 const coinJournal = {
   name: "coinJournal",
-  saveDir: "Web3",
+  Model: Web3,
   url: "https://coinjournal.net/",
   linkSelector: ["a.block"],
   articleSelectors: {
@@ -20,7 +21,12 @@ const coinJournal = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(coinJournal);
+  if (isEntryFile)
+    await singleScrape({
+      article: coinJournal,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default coinJournal;

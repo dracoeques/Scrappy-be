@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Entertainment from "../../../models/entertainment.js";
@@ -17,13 +17,22 @@ const theHollywoodReporter = {
 };
 
 export const getNews = async () => {
-  const res = await getArticles(theHollywoodReporter);
+  const res = await singleScrape({
+    article: theHollywoodReporter,
+    filepath: import.meta.url,
+    checkEntryFile: false,
+  });
   return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theHollywoodReporter);
+  if (isEntryFile)
+    await singleScrape({
+      article: theHollywoodReporter,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theHollywoodReporter;

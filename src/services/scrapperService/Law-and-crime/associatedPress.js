@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LawAndCrime from "../../../models/lawAndCrime.js";
@@ -37,7 +37,12 @@ const associatedPress = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(associatedPress);
+  if (isEntryFile)
+    await singleScrape({
+      article: associatedPress,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default associatedPress;

@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import BizAndFinance from "../../../models/bizAndFinance.js";
 
 const zacksInvestmentResearch = {
   name: "zacksInvestmentResearch",
-  saveDir: "Biz-and-Finance",
+  Model: BizAndFinance,
   url: "https://www.zacks.com/",
   linkSelector: ["article a"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const zacksInvestmentResearch = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(zacksInvestmentResearch);
+  if (isEntryFile)
+    await singleScrape({
+      article: zacksInvestmentResearch,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default zacksInvestmentResearch;

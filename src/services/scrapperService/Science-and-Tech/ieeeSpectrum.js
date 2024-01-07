@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import ScienceAndTech from "../../../models/scienceAndTech.js";
 
 const ieeeSpectrum = {
   name: "ieeeSpectrum",
-  saveDir: "Science-and-Tech",
+  Model: ScienceAndTech,
   url: "https://spectrum.ieee.org/",
   linkSelector: [".widget__headline a"],
   articleSelectors: {
@@ -21,7 +22,12 @@ const ieeeSpectrum = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(ieeeSpectrum);
+  if (isEntryFile)
+    await singleScrape({
+      article: ieeeSpectrum,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default ieeeSpectrum;

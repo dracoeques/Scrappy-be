@@ -1,12 +1,10 @@
-import { checkIsEntryFile } from "../utils.js";
-import { getArticlesCluster } from "./get-articles-cluster.js";
+import { checkIsEntryFile, getArgs } from "../utils.js";
+import { getArticle } from "./get-articles-cluster.js";
 
 const clusterScrape = async function ({
   filepath,
   articles,
   checkEntryFile = false,
-  maxConcurrency = 4,
-  concurrencyLevel = "context",
 }) {
   try {
     const { Cluster } = await import("puppeteer-cluster");
@@ -14,20 +12,17 @@ const clusterScrape = async function ({
     const StealthPlugin = (await import("puppeteer-extra-plugin-stealth"))
       .default;
     if (puppeteer) puppeteer.use(StealthPlugin());
-
     const isEntryFile = checkIsEntryFile(filepath);
     const concurrencyMap = {
       context: Cluster.CONCURRENCY_CONTEXT,
       browser: Cluster.CONCURRENCY_BROWSER,
       page: Cluster.CONCURRENCY_PAGE,
     };
+    const { maxConcurrency, concurrencyLevel } = getArgs();
 
-    if (!maxConcurrency || maxConcurrency < 0) maxConcurrency = 4;
-    if (
-      !concurrencyLevel ||
-      !Object.keys(concurrencyMap).includes(concurrencyLevel)
-    )
-      concurrencyLevel = "context";
+    // if (!maxConcurrency || maxConcurrency < 0) maxConcurrency = 4;
+    if (!Object.keys(concurrencyMap).includes(concurrencyLevel))
+      concurrencyLevel = "page";
     if ((checkEntryFile && !isEntryFile) || articles.length === 0) return;
     const cluster = await Cluster.launch({
       concurrency: concurrencyMap[concurrencyLevel],
@@ -39,13 +34,15 @@ const clusterScrape = async function ({
       monitor: true,
     });
     console.log(`Max concurrency: ${maxConcurrency}`);
-    console.log(`Concurrency level: ${concurrencyMap[concurrencyLevel]}`);
+    console.log(
+      `Concurrency level: ${concurrencyLevel}(${concurrencyMap[concurrencyLevel]})`
+    );
 
     cluster.on("taskerror", (err, data) => {
       console.log(`Error crawling ${data}: ${err.message}`);
     });
     await cluster.task(async ({ page, data }) => {
-      await getArticlesCluster(data, page);
+      await getArticle({ articleProps: data, page });
     });
     for (let article of articles) {
       cluster.queue(article);

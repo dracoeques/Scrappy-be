@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LawAndCrime from "../../../models/lawAndCrime.js";
@@ -24,7 +24,12 @@ const crimeOnline = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(crimeOnline);
+  if (isEntryFile)
+    await singleScrape({
+      article: crimeOnline,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default crimeOnline;

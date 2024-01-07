@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Gaming from "../../../models/gaming.js";
@@ -23,7 +23,12 @@ const pcGamer = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(pcGamer);
+  if (isEntryFile)
+    await singleScrape({
+      article: pcGamer,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default pcGamer;

@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import ScienceAndTech from "../../../models/scienceAndTech.js";
@@ -30,7 +30,12 @@ const cnet = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(cnet);
+  if (isEntryFile)
+    await singleScrape({
+      article: cnet,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default cnet;

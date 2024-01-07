@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Web3 from "../../../models/web3.js";
@@ -18,7 +18,12 @@ const braveNewCoin = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(braveNewCoin);
+  if (isEntryFile)
+    await singleScrape({
+      article: braveNewCoin,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default braveNewCoin;

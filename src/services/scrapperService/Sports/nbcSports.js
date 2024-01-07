@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Sports from "../../../models/sports.js";
@@ -22,7 +22,12 @@ const nbcSports = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(nbcSports);
+  if (isEntryFile)
+    await singleScrape({
+      article: nbcSports,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default nbcSports;

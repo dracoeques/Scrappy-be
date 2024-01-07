@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import ScienceAndTech from "../../../models/scienceAndTech.js";
 
 const mitTechnologyReview = {
   name: "mitTechnologyReview",
-  saveDir: "Science-and-Tech",
+  Model: ScienceAndTech,
   url: "https://www.technologyreview.com/",
   linkSelector: ["[data-event-category='homepage']"],
   articleSelectors: {
@@ -21,7 +22,12 @@ const mitTechnologyReview = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(mitTechnologyReview);
+  if (isEntryFile)
+    await singleScrape({
+      article: mitTechnologyReview,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default mitTechnologyReview;

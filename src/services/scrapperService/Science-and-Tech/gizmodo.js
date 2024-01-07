@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import ScienceAndTech from "../../../models/scienceAndTech.js";
@@ -18,7 +18,12 @@ const gizmodo = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(gizmodo);
+  if (isEntryFile)
+    await singleScrape({
+      article: gizmodo,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default gizmodo;

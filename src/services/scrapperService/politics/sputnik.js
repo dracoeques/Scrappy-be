@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Politics from "../../../models/politics.js";
 
 const sputnikNews = {
   name: "sputnikNews",
-  saveDir: "politics",
+  Model: Politics,
   url: "https://sputnikglobe.com/",
   linkSelector: [
     ".cell-main-photo__title",
@@ -20,7 +21,12 @@ const sputnikNews = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(sputnikNews);
+  if (isEntryFile)
+    await singleScrape({
+      article: sputnikNews,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default sputnikNews;

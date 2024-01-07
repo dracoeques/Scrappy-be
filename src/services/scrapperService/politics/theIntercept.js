@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Politics from "../../../models/politics.js";
@@ -27,7 +27,12 @@ const theIntercept = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theIntercept);
+  if (isEntryFile)
+    await singleScrape({
+      article: theIntercept,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theIntercept;

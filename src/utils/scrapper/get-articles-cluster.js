@@ -8,37 +8,50 @@ import {
   scrollToBottom,
 } from "../utils.js";
 import { getPageData } from "./get-page-data.js";
+import moment from "moment";
 
-export const getArticlesCluster = async (inputProps, page) => {
+export const getArticle = async ({
+  articleProps,
+  page,
+  saveAfter = 1,
+  retryErrors = false,
+  single = true,
+}) => {
+  const { dateFrom } = getArgs();
+  if (!articleProps || !page) return;
+  const {
+    name,
+    url,
+    linkSelector,
+    articleSelectors,
+    waitUntil,
+    articlesWaitUntil = "domcontentloaded",
+    Model,
+  } = articleProps;
   try {
-    const { dateFrom } = getArgs();
-    if (!inputProps || !page) return;
-    const {
-      name,
-      url,
-      linkSelector,
-      articleSelectors,
-      waitUntil,
-      articlesWaitUntil = "domcontentloaded",
-      Model,
-      saveAfter = 1,
-    } = inputProps;
     if (Model == undefined) return;
     console.log(Model, Model.modelName);
     const model = new mongoose.model(
       Model.modelName + "." + currentDate(),
       Model.schema
     );
+    const errorModel = mongoose.model(`${Model.modelName}.error`);
+    console.log("Error - model", errorModel);
     let currentSaved;
+    let currentErrors;
     let currentLinks;
+    let currentErrorLinks;
     try {
       currentSaved = await readSavedDocumnets(model, name);
+      currentErrors = await readSavedDocumnets(errorModel, name);
     } catch (err) {
       console.log("An error occured when trying to fetch links.");
       console.log(err);
     }
     if (currentSaved) currentLinks = currentSaved.map((el) => el.link);
-    console.log(currentLinks);
+    if (currentErrors) currentErrorLinks = currentErrors.map((el) => el.link);
+    console.log("Saved links\n", currentLinks);
+    console.log("Error links\n", currentErrorLinks);
 
     // making sure articleWaitUntil has a correct value
     const articlesWaitUntilVal =
@@ -52,6 +65,7 @@ export const getArticlesCluster = async (inputProps, page) => {
 
     // navigate to url and wait for it to load
     const pageData = [];
+    const pageErrorData = [];
     let baseUrl = [];
     if (!Array.isArray(url)) baseUrl.push(url);
     else baseUrl = url;
@@ -100,7 +114,12 @@ export const getArticlesCluster = async (inputProps, page) => {
         const totalPages = links.length;
         for (let link of links) {
           // checking if link is already fetched.
-          if (currentLinks.includes(link)) {
+          if (
+            (currentLinks && currentLinks.includes(link)) ||
+            (!retryErrors &&
+              currentErrorLinks &&
+              currentErrorLinks.includes(link))
+          ) {
             console.log("Link already fetched. Skipping link");
             pageCount++;
             continue;
@@ -113,6 +132,7 @@ export const getArticlesCluster = async (inputProps, page) => {
           });
           console.log("current page data: \n");
           console.log(currPage);
+          currPage.siteName = name;
           if (
             currPage &&
             currPage.link &&
@@ -122,15 +142,31 @@ export const getArticlesCluster = async (inputProps, page) => {
             currPage.article
           ) {
             console.log("pushing current page");
-            currPage.siteName = name;
             pageData.push(currPage);
             currentLinks.push(...pageData.map((el) => el.link));
+          } else {
+            const causesOfError = [];
+            for (const key of ["link", "title", "date", "article"]) {
+              if (!currPage[key] || currPage[key].length === 0)
+                causesOfError.push(`${key} missing.`);
+            }
+            if (!isWithinRange(currPage.date, dateFrom))
+              causesOfError.push(
+                `Expected date to be after ${moment()
+                  .subtract(dateFrom, "days")
+                  .format("MMM D, YYYY")} but article date is ${currPage.date}`
+              );
+            currPage.causesOfError = [...causesOfError];
+            pageErrorData.push(currPage);
+            currentLinks.push(...pageErrorData.map((el) => el.link));
           }
 
           if (pageCount >= saveAfter * saveCount) {
             await saveDocuments(model, pageData);
+            await saveDocuments(errorModel, pageErrorData);
             // deleting all saved elements
             pageData.splice(0, pageData.length);
+            pageErrorData.splice(0, pageErrorData.length);
             saveCount++;
           }
 
@@ -138,13 +174,19 @@ export const getArticlesCluster = async (inputProps, page) => {
         }
         await saveDocuments(model, pageData);
         pageData.splice(0, pageData.length);
+        pageErrorData.splice(0, pageErrorData.length);
       }
     }
 
     await page.close();
     await saveDocuments(model, pageData);
+    await saveDocuments(errorModel, pageErrorData);
   } catch (err) {
     console.log("An error has occured when trying to fetch the page");
     console.log(err);
+    if (single) {
+      console.log("Finished scrapping site");
+      process.exit(1);
+    }
   }
 };

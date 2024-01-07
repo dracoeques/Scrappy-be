@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Politics from "../../../models/politics.js";
 
 const chicagoTribune = {
   name: "chicagoTribune",
-  saveDir: "politics",
+  Model: Politics,
   url: "https://www.chicagotribune.com/",
   linkSelector: [".promo-headline a"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const chicagoTribune = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(chicagoTribune);
+  if (isEntryFile)
+    await singleScrape({
+      article: chicagoTribune,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default chicagoTribune;

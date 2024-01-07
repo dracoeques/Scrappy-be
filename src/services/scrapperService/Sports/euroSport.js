@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Sports from "../../../models/sports.js";
 
 const euroSport = {
   name: "euroSport",
-  saveDir: "Sports",
+  Model: Sports,
   url: "https://www.eurosport.com/",
   linkSelector: [
     ".EnrichedHeroCard__secondaryCardWrapper a",
@@ -20,7 +21,12 @@ const euroSport = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(euroSport);
+  if (isEntryFile)
+    await singleScrape({
+      article: euroSport,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default euroSport;

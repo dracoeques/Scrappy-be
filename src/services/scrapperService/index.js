@@ -1,5 +1,5 @@
-import clusterScrape from "../../utils/scrapper/scrape-category.js";
-import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
+import clusterScrape from "../../utils/scrapper/cluster-scrape.js";
+import { scrapeCategory } from "../../utils/scrapper/scrape-category.js";
 import allArtAndFashion from "./Art-and-Fashion/index.js";
 import allBizAndFinance from "./Biz-and-Finance/index.js";
 import allEntertainment from "./Entertainment/index.js";

@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Sports from "../../../models/sports.js";
 
 const reutersSports = {
   name: "reutersSports",
-  saveDir: "Sports",
+  Model: Sports,
   url: "https://www.reuters.com/sports/",
   linkSelector: [".heading__base__2T28j a"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const reutersSports = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(reutersSports);
+  if (isEntryFile)
+    await singleScrape({
+      article: reutersSports,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default reutersSports;

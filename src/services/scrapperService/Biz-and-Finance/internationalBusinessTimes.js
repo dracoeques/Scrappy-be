@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 import BizAndFinance from "../../../models/bizAndFinance.js";
 
@@ -17,7 +17,12 @@ const internationalBusinessTimes = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(internationalBusinessTimes);
+  if (isEntryFile)
+    await singleScrape({
+      article: internationalBusinessTimes,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default internationalBusinessTimes;

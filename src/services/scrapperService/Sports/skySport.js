@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Sports from "../../../models/sports.js";
@@ -23,7 +23,12 @@ const skySport = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(skySport);
+  if (isEntryFile)
+    await singleScrape({
+      article: skySport,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default skySport;

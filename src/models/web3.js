@@ -5,3 +5,8 @@ const web3Schema = new mongoose.Schema({
 });
 
 export default mongoose.model("web3", web3Schema);
+const web3ErrorSchema = new mongoose.Schema({
+  ...baseFields,
+});
+
+export const web3Error = mongoose.model("web3.error", web3ErrorSchema);

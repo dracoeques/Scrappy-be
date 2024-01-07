@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Web3 from "../../../models/web3.js";
 
 const cryptoGlobe = {
   name: "cryptoGlobe",
-  saveDir: "Web3",
+  Model: Web3,
   url: "https://www.cryptoglobe.com/",
   linkSelector: ["h3 .u-link-v5"],
   articleSelectors: {
@@ -20,7 +21,12 @@ const cryptoGlobe = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(cryptoGlobe);
+  if (isEntryFile)
+    await singleScrape({
+      article: cryptoGlobe,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default cryptoGlobe;

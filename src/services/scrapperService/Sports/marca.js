@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Sports from "../../../models/sports.js";
 
 const marca = {
   name: "marca",
-  saveDir: "Sports",
+  Model: Sports,
   url: "https://www.marca.com/en/",
   linkSelector: [".ue-c-cover-content__link"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const marca = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(marca);
+  if (isEntryFile)
+    await singleScrape({
+      article: marca,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default marca;

@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Politics from "../../../models/politics.js";
 
 const theGlobeAndMail = {
   name: "theGlobeAndMail",
-  saveDir: "politics",
+  Model: Politics,
   url: "https://www.theglobeandmail.com/",
   linkSelector: [".CardLink__StyledCardLink-sc-2nzf9p-0"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const theGlobeAndMail = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theGlobeAndMail);
+  if (isEntryFile)
+    await singleScrape({
+      article: theGlobeAndMail,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theGlobeAndMail;

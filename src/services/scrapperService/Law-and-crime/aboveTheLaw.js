@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LawAndCrime from "../../../models/lawAndCrime.js";
@@ -26,7 +26,12 @@ const aboveTheLaw = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(aboveTheLaw);
+  if (isEntryFile)
+    await singleScrape({
+      article: aboveTheLaw,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default aboveTheLaw;

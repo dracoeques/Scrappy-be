@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Entertainment from "../../../models/entertainment.js";
@@ -22,13 +22,22 @@ const entertainmentWeekly = {
 };
 
 export const getNews = async () => {
-  const res = await getArticles(entertainmentWeekly);
+  const res = await singleScrape({
+    article: entertainmentWeekly,
+    filepath: import.meta.url,
+    checkEntryFile: false,
+  });
   return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(entertainmentWeekly);
+  if (isEntryFile)
+    await singleScrape({
+      article: entertainmentWeekly,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default entertainmentWeekly;

@@ -1,22 +1,37 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import BizAndFinance from "../../../models/bizAndFinance.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 const australianFinancialReview = {
   name: "australianFinancialReview",
-  saveDir: "Biz-and-Finance",
+  Model: BizAndFinance,
   url: "https://www.afr.com/",
-  linkSelector: ["._3o1rI", "._1d_DB", "._1IYDa", "._20-Rx", "._1naPl"],
+  linkSelector: ["h3 a"],
   articleSelectors: {
     titleSelector: ["[data-testid='ArticleHeader-headline']"],
     dateSelector: ["time"],
-    contentSelector: [".tl7wu p"],
-    articleContentSelector: [".tl7wu p"],
+    contentSelector: [".ECcGH p"],
+    articleContentSelector: [".VtXRu p"],
   },
+};
+
+export const getNews = async () => {
+  const res = await singleScrape({
+    article: australianFinancialReview,
+    filepath: import.meta.url,
+    checkEntryFile: false,
+  });
+  return res;
 };
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(australianFinancialReview);
+  if (isEntryFile)
+    await singleScrape({
+      article: australianFinancialReview,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default australianFinancialReview;

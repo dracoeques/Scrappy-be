@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import Gaming from "../../../models/gaming.js";
@@ -23,7 +23,12 @@ const vg247 = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(vg247);
+  if (isEntryFile)
+    await singleScrape({
+      article: vg247,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default vg247;

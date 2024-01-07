@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import BizAndFinance from "../../../models/bizAndFinance.js";
 
 const nikkeiAsianReview = {
   name: "nikkeiAsianReview",
-  saveDir: "Biz-and-Finance",
+  Model: BizAndFinance,
   url: "https://asia.nikkei.com/",
   linkSelector: [
     ".spotlight__title",
@@ -20,7 +21,12 @@ const nikkeiAsianReview = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(nikkeiAsianReview);
+  if (isEntryFile)
+    await singleScrape({
+      article: nikkeiAsianReview,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default nikkeiAsianReview;

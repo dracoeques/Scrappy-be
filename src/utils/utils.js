@@ -126,6 +126,13 @@ export const getArgs = () => {
         choices: ["cluster", "legacy"],
         type: "string",
       },
+      r: {
+        alias: ["retry-error", "re"],
+        demadOption: false,
+        default: false,
+        describe: "Retry Sites that have previously not been fully scraped",
+        type: "boolean",
+      },
     })
     .wrap(null)
     .help("help").argv;

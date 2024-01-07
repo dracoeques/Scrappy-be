@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Web3 from "../../../models/web3.js";
 
 const newsBtc = {
   name: "newsBtc",
-  saveDir: "Web3",
+  Model: Web3,
   url: "https://www.newsbtc.com/",
   linkSelector: [".jeg_post_title a"],
   articleSelectors: {
@@ -20,7 +21,12 @@ const newsBtc = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(newsBtc);
+  if (isEntryFile)
+    await singleScrape({
+      article: newsBtc,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default newsBtc;

@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Politics from "../../../models/politics.js";
 
 const theTelegraph = {
   name: "theTelegraph",
-  saveDir: "politics",
+  Model: Politics,
   url: "https://www.telegraph.co.uk/",
   linkSelector: [".list-headline__link"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const theTelegraph = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theTelegraph);
+  if (isEntryFile)
+    await singleScrape({
+      article: theTelegraph,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theTelegraph;

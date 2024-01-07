@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LawAndCrime from "../../../models/lawAndCrime.js";
@@ -29,7 +29,12 @@ const justia = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(justia);
+  if (isEntryFile)
+    await singleScrape({
+      article: justia,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default justia;

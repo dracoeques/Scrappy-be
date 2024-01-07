@@ -1,9 +1,10 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
+import Sports from "../../../models/sports.js";
 
 const theGuardianSport = {
   name: "theGuardianSport",
-  saveDir: "Sports",
+  Model: Sports,
   url: "https://www.theguardian.com/uk/sport",
   linkSelector: [".dcr-6vr3s5 a", ".dcr-bgmi23 a"],
   articleSelectors: {
@@ -16,7 +17,12 @@ const theGuardianSport = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(theGuardianSport);
+  if (isEntryFile)
+    await singleScrape({
+      article: theGuardianSport,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default theGuardianSport;

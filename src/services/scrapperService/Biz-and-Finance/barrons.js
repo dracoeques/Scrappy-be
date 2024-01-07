@@ -1,4 +1,4 @@
-// import { getArticles } from "../../../utils/scrapper/get-articles.js";
+// import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 // import { checkIsEntryFile } from "../../../utils/utils.js";
 
 // import BizAndFinance from "../../../models/bizAndFinance.js";
@@ -25,13 +25,21 @@
 //   },
 // };
 // export const getNews = async () => {
-//   const res = await getArticles(artNews);
+//   const res = await singleScrape({
+//   article: artNews,
+//   filepath: import.meta.url,
+//   checkEntryFile: true,
+// });;
 //   return res;
 // };
 
 // (async () => {
 //   const isEntryFile = checkIsEntryFile(import.meta.url);
-//   if (isEntryFile) await getArticles(seekingAlpha);
+//   if (isEntryFile) await singleScrape({
+//   article: artNews,
+//   filepath: import.meta.url,
+//   checkEntryFile: true,
+// });;
 // })();
 
 // export default seekingAlpha;

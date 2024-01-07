@@ -1,4 +1,4 @@
-export default {
+const baseFields = {
   siteName: String,
   title: String,
   date: String,
@@ -6,3 +6,10 @@ export default {
   link: String,
   //   scrapeDate: Date,
 };
+export const baseErrorFields = {
+  ...baseFields,
+  scrapeDate: String,
+  causesOfError: [String], // Array of strings
+};
+
+export default baseFields;

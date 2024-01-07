@@ -1,4 +1,4 @@
-import { getArticles } from "../../../utils/scrapper/get-articles.js";
+import { singleScrape } from "../../../utils/scrapper/single-scrape.js";
 import { checkIsEntryFile } from "../../../utils/utils.js";
 
 import LifestyleAndHealth from "../../../models/lifestyleAndHealth.js";
@@ -33,7 +33,12 @@ const mensHealth = {
 
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
-  if (isEntryFile) await getArticles(mensHealth);
+  if (isEntryFile)
+    await singleScrape({
+      article: mensHealth,
+      filepath: import.meta.url,
+      checkEntryFile: true,
+    });
 })();
 
 export default mensHealth;
