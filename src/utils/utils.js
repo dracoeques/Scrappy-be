@@ -1,6 +1,7 @@
 import { promisify } from "util";
 import { fileURLToPath } from "url";
-
+import yargs from "yargs";
+import { hideBin } from "yargs/helpers";
 /// puppeteer helpers
 
 // function to scroll to the bottom of the page.
@@ -74,7 +75,6 @@ export const sleep = promisify(setTimeout);
 export const checkIsEntryFile = (filename) => {
   const cleanFileName = fileURLToPath(filename);
   const entryFile = process.argv[1];
-
   return entryFile === cleanFileName;
 };
 
@@ -83,24 +83,54 @@ const isDate = (input) => {
   return false;
 };
 
-export const isWithinRange = (currDate, daysToSubtract = 7) => {
+export const isWithinRange = (currDate, daysToSubtract) => {
   const date = new Date(currDate);
   if (isNaN(date) || !isDate(date)) return true;
   const passedDate = date.getTime();
+  if (!daysToSubtract || typeof daysToSubtract !== "number") daysToSubtract = 7;
   const endDate = new Date().getTime() - daysToSubtract * 24 * 60 * 60 * 1000;
   if (passedDate < endDate) return false;
   return true;
 };
 
 export const getArgs = () => {
-  let args = [...process.argv];
-  const params = { maxConcurency: null, concurencyLevel: null };
-  args.splice(0, 2);
-  for (let arg of args) {
-    if (arg.includes("max-concurrency")) {
-      params.maxConcurency = +arg.split("=")[1];
-    } else if (arg.includes("concurrency-level"))
-      params.concurencyLevel = arg.split("=")[1];
-  }
-  return params;
+  return yargs(hideBin(process.argv))
+    .options({
+      c: {
+        alias: ["max-concurrency", "mc"],
+        demandOption: false,
+        default: 4,
+        describe: "Maximum number of concurrent scrappers",
+        type: "number",
+      },
+      d: {
+        alias: ["date-from", "df"],
+        demandOption: false,
+        default: 7,
+        describe: "Earliest date to include files (in days)",
+        type: "number",
+      },
+      l: {
+        alias: ["concurrency-level", "cl"],
+        demandOption: false,
+        default: "page",
+        describe: "Level of concurrency for running scrapper",
+        choices: ["page", "context", "browser"],
+        type: "string",
+      },
+      m: {
+        alias: "mode",
+        demandOption: false,
+        default: "cluster",
+        describe: "Mode in which scrapper is run",
+        choices: ["cluster", "legacy"],
+        type: "string",
+      },
+    })
+    .wrap(null)
+    .help("help").argv;
+};
+
+export const printHighlightedText = (text) => {
+  console.log("\x1b[1m\x1b[43m\x1b[34m%s\x1b[0m", text);
 };

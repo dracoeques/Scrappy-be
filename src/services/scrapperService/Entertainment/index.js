@@ -1,5 +1,5 @@
-import clusterScrape from "../../../utils/scrapper/scrape-category.js";
-import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
+import clusterScrape from "../../../utils/scrapper/cluster-scrape.js";
+import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
 import billboard from "./billboard.js";
 import chinaDaily from "./chinaDaily.js";
 import dailyDot from "./dailydot.js";
@@ -54,18 +54,9 @@ export const getNews = async () => {
     articles: allEntertainment,
   });
 };
-(async () => {
-  console.log("here");
-  // if (checkIsEntryFile(import.meta.url)) return;
-  const { maxConcurency, concurencyLevel } = getArgs();
 
-  await clusterScrape({
-    filepath: import.meta.url,
-    articles: allEntertainment,
-    checkEntryFile: true,
-    maxConcurrency: maxConcurency,
-    concurrencyLevel: concurencyLevel,
-  });
+(async () => {
+  await scrapeCategory(allEntertainment, import.meta.url);
 })();
 
 export default allEntertainment;

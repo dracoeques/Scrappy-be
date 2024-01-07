@@ -1,5 +1,5 @@
 import clusterScrape from "../../utils/scrapper/scrape-category.js";
-import { getArgs } from "../../utils/utils.js";
+import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
 import allArtAndFashion from "./Art-and-Fashion/index.js";
 import allBizAndFinance from "./Biz-and-Finance/index.js";
 import allEntertainment from "./Entertainment/index.js";
@@ -28,14 +28,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  const { maxConcurency, concurencyLevel } = getArgs();
-  await clusterScrape({
-    filepath: import.meta.url,
-    articles: allArticles,
-    checkEntryFile: true,
-    maxConcurrency: maxConcurency,
-    concurrencyLevel: concurencyLevel,
-  });
+  await scrapeCategory(allArticles, import.meta.url);
 })();
 
 export default allArticles;

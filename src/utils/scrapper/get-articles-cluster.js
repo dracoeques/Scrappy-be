@@ -1,24 +1,17 @@
-// import puppeteer from "puppeteer-extra";
-// import StealthPlugin from "puppeteer-extra-plugin-stealth";
 import mongoose from "../mongoose.js";
 import {
   currentDate,
+  getArgs,
+  isWithinRange,
   readSavedDocumnets,
   saveDocuments,
   scrollToBottom,
 } from "../utils.js";
+import { getPageData } from "./get-page-data.js";
 
-// puppeteer.use(StealthPlugin());
-
-// const cluster = await Cluster.launch({
-//   concurrency: Cluster.CONCURRENCY_BROWSER,
-//   maxConcurrency: 10,
-// });
-
-// cluster.task(async ({ page, data }) => {});
-
-export const getArticles = async (inputProps, page) => {
+export const getArticlesCluster = async (inputProps, page) => {
   try {
+    const { dateFrom } = getArgs();
     if (!inputProps || !page) return;
     const {
       name,
@@ -38,7 +31,6 @@ export const getArticles = async (inputProps, page) => {
     );
     let currentSaved;
     let currentLinks;
-    // let page;
     try {
       currentSaved = await readSavedDocumnets(model, name);
     } catch (err) {
@@ -56,12 +48,6 @@ export const getArticles = async (inputProps, page) => {
       articlesWaitUntil !== "load"
         ? "domcontentloaded"
         : articlesWaitUntil;
-    // const browser = await puppeteer.launch({
-    //   headless: true,
-    // });
-
-    // // create a page and set its viewport
-    // const page = await browser.newPage();
     await page.setViewport({ width: 1000, height: 6000 });
 
     // navigate to url and wait for it to load
@@ -132,6 +118,7 @@ export const getArticles = async (inputProps, page) => {
             currPage.link &&
             currPage.title &&
             currPage.date &&
+            isWithinRange(currPage.date, dateFrom) &&
             currPage.article
           ) {
             console.log("pushing current page");
@@ -155,115 +142,9 @@ export const getArticles = async (inputProps, page) => {
     }
 
     await page.close();
-    // await browser.close();
     await saveDocuments(model, pageData);
   } catch (err) {
     console.log("An error has occured when trying to fetch the page");
     console.log(err);
   }
-};
-
-const getPageData = async (
-  link,
-  page,
-  articlesWaitUntil,
-  { titleSelector, dateSelector, contentSelector, articleContentSelector }
-) => {
-  if (!link) {
-    console.error("Error: link not found");
-    return {};
-  }
-  console.log(`NAVIGATING TO ${link}`);
-
-  try {
-    await page.goto(link, {
-      waitUntil: articlesWaitUntil,
-      timeout: 75000,
-    });
-  } catch (err) {
-    console.log(`Error when fetching link ${link}. Skipping link.`);
-  }
-
-  await page.setViewport({ width: 1000, height: 6000 });
-
-  const currPageData = await page.evaluate(
-    ({
-      titleSelector,
-      dateSelector,
-      contentSelector,
-      articleContentSelector,
-    }) => {
-      const getElement = (selectors, many = false) => {
-        if (!Array.isArray(selectors)) {
-          const element = many
-            ? document.querySelectorAll(selectors)
-            : document.querySelector(selectors);
-          if (element) return element;
-          return { empty: true };
-        }
-
-        const element = many
-          ? document.querySelectorAll(selectors.join(", "))
-          : document.querySelector(selectors.join(", "));
-        if ((many && element.length > 0) || (!many && element)) return element;
-
-        return { empty: true };
-      };
-      const title = getElement(titleSelector, false).innerText;
-
-      // getting date
-      let dateAttrSelector = "";
-      let dateElementSelector = "";
-      for (let currDateSelector of dateSelector) {
-        if (currDateSelector && currDateSelector.split("?").length > 1) {
-          let dateGetter = currDateSelector.split("?");
-          dateElementSelector = dateGetter[0];
-          dateAttrSelector = dateGetter[1];
-          if (
-            dateSelector.indexOf(dateElementSelector) !==
-            dateSelector.length - 1
-          )
-            dateElementSelector += ", ";
-        } else {
-          dateElementSelector += `${currDateSelector}`;
-          dateAttrSelector = "";
-          if (
-            dateSelector.indexOf(currDateSelector) !==
-            dateSelector.length - 1
-          )
-            dateElementSelector += ", ";
-        }
-      }
-      const dateTimeElement = getElement(dateElementSelector, false);
-      const dateTime =
-        !dateTimeElement.empty &&
-        dateAttrSelector &&
-        dateTimeElement.getAttribute(dateAttrSelector)
-          ? dateTimeElement.getAttribute(dateAttrSelector)
-          : dateTimeElement.innerText;
-
-      const content = getElement(contentSelector, false).innerText;
-      const articleContent = Array.from(
-        getElement(articleContentSelector, true)
-      )
-        .map((curr_content) => curr_content.innerText)
-        .filter((content_text) => content_text.length > 0)
-        .join("\n");
-      return {
-        title,
-        date: dateTime,
-        content,
-        article: articleContent,
-      };
-    },
-    {
-      titleSelector,
-      dateSelector,
-      contentSelector,
-      articleContentSelector,
-    }
-  );
-  if (!currPageData) return {};
-  currPageData.link = link;
-  return currPageData;
 };

@@ -1,5 +1,5 @@
-import clusterScrape from "../../../utils/scrapper/scrape-category.js";
-import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
+import clusterScrape from "../../../utils/scrapper/cluster-scrape.js";
+import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
 import destructoid from "./destructoid.js";
 import escapistMagazine from "./escapistMagazine.js";
 import euroGamer from "./euroGamer.js";
@@ -40,16 +40,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  if (!checkIsEntryFile(import.meta.url)) return;
-  const { maxConcurency, concurencyLevel } = getArgs();
-
-  await clusterScrape({
-    filepath: import.meta.url,
-    articles: allGaming,
-    checkEntryFile: true,
-    maxConcurrency: maxConcurency,
-    concurrencyLevel: concurencyLevel,
-  });
+  await scrapeCategory(allGaming, import.meta.url);
 })();
 
 export default allGaming;

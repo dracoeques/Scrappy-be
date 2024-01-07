@@ -1,63 +1,24 @@
-import { checkIsEntryFile } from "../utils.js";
-import { getArticles } from "./get-articles-cluster.js";
+import clusterScrape from "./cluster-scrape.js";
+import { getArticles } from "./get-articles.js";
+import { checkIsEntryFile, getArgs, printHighlightedText } from "../utils.js";
 
-const clusterScrape = async function ({
-  filepath,
-  articles,
-  checkEntryFile = false,
-  maxConcurrency = 4,
-  concurrencyLevel = "context",
-}) {
-  try {
-    const { Cluster } = await import("puppeteer-cluster");
-    let puppeteer = (await import("puppeteer-extra")).default;
-    const StealthPlugin = (await import("puppeteer-extra-plugin-stealth"))
-      .default;
-    if (puppeteer) puppeteer.use(StealthPlugin());
-    // else {
-    //   return;
-    // }
-    const isEntryFile = checkIsEntryFile(filepath);
-    const concurrencyMap = {
-      context: Cluster.CONCURRENCY_CONTEXT,
-      browser: Cluster.CONCURRENCY_BROWSER,
-      page: Cluster.CONCURRENCY_PAGE,
-    };
+export const scrapeCategory = async (articles, filePath) => {
+  if (!checkIsEntryFile(filePath)) return false;
 
-    if (!maxConcurrency || maxConcurrency < 0) maxConcurrency = 4;
-    if (
-      !concurrencyLevel ||
-      !Object.keys(concurrencyMap).includes(concurrencyLevel)
-    )
-      concurrencyLevel = "context";
-    if ((checkEntryFile && !isEntryFile) || articles.length === 0) return;
-    const cluster = await Cluster.launch({
-      concurrency: concurrencyMap[concurrencyLevel],
-      maxConcurrency:
-        articles.length < maxConcurrency ? articles.length : maxConcurrency,
-      retryLimit: 10,
-      puppeteer: puppeteer,
-      timeout: 750000,
-      monitor: true,
-    });
-    console.log(`Max concurrency: ${maxConcurrency}`);
-    console.log(`Concurrency level: ${concurrencyMap[concurrencyLevel]}`);
-
-    cluster.on("taskerror", (err, data) => {
-      console.log(`Error crawling ${data}: ${err.message}`);
-    });
-    await cluster.task(async ({ page, data }) => {
-      await getArticles(data, page);
-    });
+  const { maxConcurrency, concurrencyLevel, mode } = getArgs();
+  if (mode === "legacy") {
+    printHighlightedText("RUNNING IN LEGACY MODE");
     for (let article of articles) {
-      cluster.queue(article);
+      await getArticles(article);
     }
-    await cluster.idle();
-    await cluster.close();
-  } catch (err) {
-    console.error("Error scrapping pages");
-    console.error(err);
+  } else if (mode === "cluster") {
+    printHighlightedText("RUNNING IN CLUSTER MODE");
+    await clusterScrape({
+      filepath: filePath,
+      articles: articles,
+      checkEntryFile: true,
+      maxConcurrency: maxConcurrency,
+      concurrencyLevel: concurrencyLevel,
+    });
   }
 };
-
-export default clusterScrape;

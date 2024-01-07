@@ -1,5 +1,5 @@
-import clusterScrape from "../../../utils/scrapper/scrape-category.js";
-import { checkIsEntryFile, getArgs } from "../../../utils/utils.js";
+import clusterScrape from "../../../utils/scrapper/cluster-scrape.js";
+import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
 import vogue from "./vogue.js";
 import artNews from "./artNews.js";
 import artsy from "./artsy.js";
@@ -32,15 +32,7 @@ export const getNews = async () => {
 };
 
 (async () => {
-  if (!checkIsEntryFile(import.meta.url)) return;
-  const { maxConcurency, concurencyLevel } = getArgs();
-  await clusterScrape({
-    filepath: import.meta.url,
-    articles: allArtAndFashion,
-    checkEntryFile: true,
-    maxConcurrency: maxConcurency,
-    concurrencyLevel: concurencyLevel,
-  });
+  await scrapeCategory(allArtAndFashion, import.meta.url);
 })();
 
 export default allArtAndFashion;
