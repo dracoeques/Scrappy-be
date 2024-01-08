@@ -1,5 +1,5 @@
 import { checkIsEntryFile, getArgs } from "../utils.js";
-import { getArticle } from "./get-articles-cluster.js";
+import { getArticles } from "./get-articles.js";
 
 const clusterScrape = async function ({
   filepath,
@@ -42,13 +42,15 @@ const clusterScrape = async function ({
       console.log(`Error crawling ${data}: ${err.message}`);
     });
     await cluster.task(async ({ page, data }) => {
-      await getArticle({ articleProps: data, page });
+      await getArticles({ articleProps: data, page, single: false });
     });
     for (let article of articles) {
       cluster.queue(article);
     }
     await cluster.idle();
     await cluster.close();
+    console.log("Finished scraping sites");
+    process.exit(0);
   } catch (err) {
     console.error("Error scrapping pages");
     console.error(err);

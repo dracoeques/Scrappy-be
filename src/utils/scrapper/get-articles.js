@@ -10,7 +10,7 @@ import {
 import { getPageData } from "./get-page-data.js";
 import moment from "moment";
 
-export const getArticle = async ({
+export const getArticles = async ({
   articleProps,
   page,
   saveAfter = 1,
@@ -144,7 +144,7 @@ export const getArticle = async ({
             console.log("pushing current page");
             pageData.push(currPage);
             currentLinks.push(...pageData.map((el) => el.link));
-          } else {
+          } else if (currPage.link) {
             const causesOfError = [];
             for (const key of ["link", "title", "date", "article"]) {
               if (!currPage[key] || currPage[key].length === 0)

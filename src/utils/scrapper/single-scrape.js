@@ -1,10 +1,11 @@
 import { checkIsEntryFile, getArgs } from "../utils.js";
-import { getArticle } from "./get-articles-cluster.js";
+import { getArticles } from "./get-articles.js";
 
 export const singleScrape = async function ({
   article,
   filepath,
   checkEntryFile = true,
+  single = true,
 }) {
   let puppeteer = (await import("puppeteer-extra")).default;
   const StealthPlugin = (await import("puppeteer-extra-plugin-stealth"))
@@ -19,7 +20,7 @@ export const singleScrape = async function ({
   const page = await browser.newPage();
   try {
     console.log("trying");
-    await getArticle({ articleProps: article, page, single: true, retryError });
+    await getArticles({ articleProps: article, page, single, retryError });
   } catch (err) {
     console.error("Problem when scraping sites ", err);
   }

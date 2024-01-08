@@ -13,8 +13,11 @@ export const scrapeCategory = async (articles, filePath) => {
         article: article,
         filepath: filePath,
         checkEntryFile: true,
+        single: false,
       });
     }
+    console.log("Finished scraping sites");
+    process.exit(0);
   } else if (mode === "cluster") {
     printHighlightedText("RUNNING IN CLUSTER MODE");
     await clusterScrape({
