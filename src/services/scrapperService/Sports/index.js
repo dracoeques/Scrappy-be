@@ -23,29 +23,63 @@ import theIndependent from "./theIndependent.js";
 import theTelegraph from "./theTelegraph.js";
 import tmz from "./tmz.js";
 import wallStreetJournal from "./wallStreetJournal.js";
+import atpTour from "./atpTour.js";
+import autoSport from "./autoSport.js";
+import bowl from "./bowl.js";
+import cricketWorld from "./cricketWorld.js";
+import cyclingNews from "./cyclingNews.js";
+import formula1 from "./formula1.js";
+import golfDigest from "./golfDigest.js";
+import insideLacrosse from "./insideLacrosse.js";
+import nhl from "./nhl.js";
+import runnersWorld from "./runnersWorld.js";
+import sailingWorld from "./sailingWorld.js";
+import snowBoarder from "./snowboarder.js";
+import surferToday from "./surferToday.js";
+import swimSwam from "./swimSwam.js";
+import tennis from "./tennis.js";
+import thrasherMagazine from "./thrasherMagazine.js";
+import trackAndFieldNews from "./trackAndFieldNews.js";
 
 const allSport = [
   aljazeeraSports,
   apNews,
+  atpTour,
+  autoSport,
   bbc,
   bleacherReport,
+  bowl,
   cbsSports,
   cnn,
+  cricketWorld,
+  cyclingNews,
   espn,
   euroSport,
+  formula1,
   foxSports,
+  golfDigest,
+  insideLacrosse,
   marca,
   nbcSports,
   nhkSports,
+  nhl,
   reutersSports,
+  runnersWorld,
+  sailingWorld,
   sbNation,
   skySport,
+  snowBoarder,
   sportsNet,
+  surferToday,
+  swimSwam,
+  tennis,
   theAthletic,
   theGuardianSport,
   theIndependent,
   theTelegraph,
+  thrasherMagazine,
   tmz,
+  trackAndFieldNews,
   wallStreetJournal,
   yahooSports,
 ];

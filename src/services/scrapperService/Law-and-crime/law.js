@@ -6,16 +6,19 @@ import LawAndCrime from "../../../models/lawAndCrime.js";
 const law = {
   name: "law",
   Model: LawAndCrime,
-  url: ["https://www.law.com/"],
-  linkSelector: [
-    ".articleMain",
-    ".sideArticle",
-    ".latest-item-title a",
-    ".article-title a",
-    ".covid-item-title a",
-    ".popular-item-container a",
-    ".alm-item-title a",
+  url: [
+    "https://www.law.com/thelegalintelligencer/",
+    "https://www.law.com/newyorklawjournal/",
+    "https://www.law.com/",
+    "https://www.law.com/nationallawjournal/",
+    "https://www.law.com/americanlawyer/",
+    "https://www.law.com/corpcounsel/",
+    "https://www.law.com/legaltechnews/",
+    "https://www.law.com/therecorder/",
+    "https://www.law.com/dailybusinessreview/",
+    "https://www.law.com/litigationdaily/",
   ],
+  linkSelector: ["h4 a", "h5 a"],
   articleSelectors: {
     titleSelector: ["h1"],
     dateSelector: [
@@ -27,7 +30,6 @@ const law = {
     articleContentSelector: [".access-body p", ".access-body h2"],
   },
 };
-
 (async () => {
   const isEntryFile = checkIsEntryFile(import.meta.url);
   if (isEntryFile)

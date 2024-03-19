@@ -5,6 +5,7 @@ import bbc from "./bbc.js";
 import businessInsider from "./businessInsider.js";
 import cnn from "./cnn.js";
 import everydayHealth from "./everydayHealth.js";
+import gothamist from "./gothamist.js";
 import health from "./health.js";
 import healthline from "./healthline.js";
 import hollywoodReporter from "./hollywoodReporter.js";
@@ -28,6 +29,7 @@ const allLifestyleAndHealth = [
   businessInsider,
   cnn,
   everydayHealth,
+  gothamist,
   health,
   healthline,
   hollywoodReporter,

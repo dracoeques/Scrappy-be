@@ -12,17 +12,31 @@ import theMarshallProject from "./theMarshallProject.js";
 import associatedPress from "./associatedPress.js";
 import theIndependent from "./theIndependent.js";
 import lawTopics from "./lawTopics.js";
+import buzzfeed from "./buzzfeed.js";
+import icij from "./icij.js";
+import revealNews from "./revealNews.js";
+import scotUsBlog from "./scotUsBlog.js";
+import texasTribune from "./texasTribune.js";
+import theAppeal from "./theAppeal.js";
+import theBureauInvestigates from "./theBureauInvestigates.js";
 
 const allLaw = [
   aboveTheLaw,
   associatedPress,
+  buzzfeed,
   courthouseNewsService,
   crimeOnline,
   findLaw,
+  icij,
   justia,
   law,
   lawTopics,
   legalInsurrection,
+  revealNews,
+  scotUsBlog,
+  texasTribune,
+  theAppeal,
+  theBureauInvestigates,
   theCrimeReport,
   theIndependent,
   theMarshallProject,

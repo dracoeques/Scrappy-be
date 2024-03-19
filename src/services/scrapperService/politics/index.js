@@ -53,6 +53,7 @@ import theIntercept from "./theIntercept.js";
 import theModerateVoice from "./theModerateVoice.js";
 import visualCapitalist from "./visualCapitalist.js";
 import wallStreetJournal from "./wallStreetJournal.js";
+import foreignPolicy from "./foreignPolicy.js";
 
 const allPolitics = [
   abcPolitics,
@@ -69,6 +70,7 @@ const allPolitics = [
   cnbc,
   cnn,
   dailyKos,
+  foreignPolicy,
   foxNews,
   gulfNews,
   huffPost,
