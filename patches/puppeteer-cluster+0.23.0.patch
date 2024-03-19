@@ -1,0 +1,14 @@
+diff --git a/node_modules/puppeteer-cluster/dist/Job.js b/node_modules/puppeteer-cluster/dist/Job.js
+index eaa1141..662b04a 100644
+--- a/node_modules/puppeteer-cluster/dist/Job.js
++++ b/node_modules/puppeteer-cluster/dist/Job.js
+@@ -19,6 +19,9 @@ class Job {
+         if (typeof this.data.url === 'string') {
+             return this.data.url;
+         }
++        if (Array.isArray(this.data.url)) {
++            return this.data.url.join(' ')
++        }
+         return undefined;
+     }
+     getDomain() {

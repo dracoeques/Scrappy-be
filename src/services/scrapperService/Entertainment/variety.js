@@ -6,13 +6,18 @@ import Entertainment from "../../../models/entertainment.js";
 const variety = {
   name: "variety",
   Model: Entertainment,
-  url: "https://variety.com/",
+  url: [
+    "https://variety.com/v/music/",
+    "https://variety.com/v/tv/",
+    "https://variety.com/v/film/",
+    "https://variety.com/",
+  ],
   linkSelector: [".c-title__link"],
   articleSelectors: {
     titleSelector: ["#section-heading"],
     dateSelector: ["time"],
-    contentSelector: [".o-custom-paragraph"],
-    articleContentSelector: [".pmc-not-a-paywall p"],
+    contentSelector: [".o-custom-paragraph", ".pmc-paywall p"],
+    articleContentSelector: [".pmc-not-a-paywall p", ".pmc-paywall p"],
   },
 };
 

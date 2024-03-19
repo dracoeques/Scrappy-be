@@ -6,16 +6,21 @@ import Politics from "../../../models/politics.js";
 const politico = {
   name: "politico",
   Model: Politics,
-  url: "https://www.politico.com/",
-  linkSelector: [".headline > a"],
+  url: [
+    "https://www.politico.com/news/foreign-affairs",
+    "https://www.politico.com/news/2024-elections",
+    "https://www.politico.eu/uk/",
+    "https://www.politico.com/",
+  ],
+  linkSelector: [".headline > a", "h2 a", "h1 a", "h3 a"],
   articleSelectors: {
     titleSelector: [".headline", ".article-meta__title"],
-    dateSelector: ["time", ".date-time "],
-    contentSelector: [".dek", ".article-meta__excerpt"],
+    dateSelector: ["time", ".date-time", ".date-time__date"],
+    contentSelector: [".dek", ".article-meta__excerpt", ".article__content p"],
     articleContentSelector: [
       ".story-text > p",
       ".story-text__paragraph",
-      ".article__content > p",
+      ".article__content p",
     ],
   },
 };

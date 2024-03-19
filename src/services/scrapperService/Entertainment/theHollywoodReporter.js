@@ -6,7 +6,12 @@ import Entertainment from "../../../models/entertainment.js";
 const theHollywoodReporter = {
   name: "theHollywoodReporter",
   Model: Entertainment,
-  url: "https://www.hollywoodreporter.com/",
+  url: [
+    "https://www.hollywoodreporter.com/",
+    "https://www.hollywoodreporter.com/t/awards/",
+    "https://www.hollywoodreporter.com/c/business/",
+    "https://www.hollywoodreporter.com/c/movies/",
+  ],
   linkSelector: [".c-title__link", ".o-card__content > a"],
   articleSelectors: {
     titleSelector: [".article-title"],

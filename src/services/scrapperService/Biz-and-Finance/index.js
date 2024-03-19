@@ -32,41 +32,90 @@ import cheddar from "./cheddar.js";
 import zacksInvestmentResearch from "./zacksInvestmentResearch.js";
 import theMotleyFool from "./theMotleyFool.js";
 import caixinGlobal from "./caixinGlobal.js";
+import americanBanker from "./americanBanker.js";
+import bbc from "./bbc.js";
+import businessBecause from "./businessBecause.js";
+import businessInsiderAfrica from "./businessInsiderAfrica.js";
+import businessWire from "./businessWire.js";
+import financialBuzz from "./financialBuzz.js";
+import financialPost from "./financialPost.js";
+import investing from "./investing.js";
+import investoPaper from "./investoPaper.js";
+import investors from "./investors.js";
+import kiplinger from "./kiplinger.js";
+import marketRealist from "./marketRealist.js";
+import morningBrew from "./morningBrew.js";
+import nasdaq from "./nasdaq.js";
+import nbcNews from "./nbcNews.js";
+import nyTimes from "./nyTimes.js";
+import pymnts from "./pymnts.js";
+import theTelegraph from "./telegraph.js";
+import theFintechTimes from "./theFintechTimes.js";
+import theFiscalTimes from "./theFiscalTimes.js";
+import thisIsMoney from "./thisIsMoney.js";
+import wallStreetJournalFinance from "./wallStreetJournalFinance.js";
+import zeroHedge from "./zeroHedge.js";
+import streetWiseReport from "./streetWiseReport.js";
+import theBalanceMoney from "./theBalanceMoney.js";
 
 const allBizAndFinance = [
   abc,
+  americanBanker,
+  australianFinancialReview,
+  bbc,
   bizJournals,
   bloomberg,
+  businessBecause,
   businessInsider,
+  businessInsiderAfrica,
   businessStandard,
+  businessWire,
   caixinGlobal,
+  cheddar,
   chinaBriefing,
   cnbc,
   cnnBusiness,
   dw,
   euroNews,
   europeanBusinessMagazine,
+  financialBuzz,
+  financialPost,
   financialTimes,
   forbes,
   fortune,
   foxBusiness,
   inc,
   internationalBusinessTimes,
+  investing,
+  investoPaper,
   investopedia,
+  investors,
+  kiplinger,
+  marketRealist,
   marketWatch,
-  seekingAlpha,
-  theEconomist,
-  wallStreetJournal,
-  yahooFinance,
+  morningBrew,
   morningStar,
-  reuters,
-  theStreet,
+  nasdaq,
+  nbcNews,
   nikkeiAsianReview,
-  australianFinancialReview,
-  cheddar,
-  zacksInvestmentResearch,
+  nyTimes,
+  pymnts,
+  reuters,
+  seekingAlpha,
+  streetWiseReport,
+  theTelegraph,
+  theBalanceMoney,
+  theEconomist,
+  theFintechTimes,
+  theFiscalTimes,
   theMotleyFool,
-  caixinGlobal,
+  theStreet,
+  thisIsMoney,
+  wallStreetJournal,
+  wallStreetJournalFinance,
+  yahooFinance,
+  zacksInvestmentResearch,
+  zeroHedge,
 ];
 
 export const getNews = async () => {

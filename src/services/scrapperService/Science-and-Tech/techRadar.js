@@ -6,10 +6,10 @@ const techRadar = {
   name: "techRadar",
   Model: ScienceAndTech,
   url: "https://www.techradar.com/",
-  linkSelector: [".article-link", ".wcl-item-right a"],
+  linkSelector: [".wcl-item-right a", ".wdn-listv2-item-link"],
   articleSelectors: {
     titleSelector: ["header h1"],
-    dateSelector: ["time"],
+    dateSelector: ["time?datetime"],
     contentSelector: [".strapline"],
     articleContentSelector: [
       "#article-body p",

@@ -14,6 +14,7 @@ const reuters = {
     contentSelector: [".article-body__content__17Yit > p"],
     articleContentSelector: [".article-body__content__17Yit > p"],
   },
+  articlesWaitUntil: "networkidle2",
 };
 
 (async () => {

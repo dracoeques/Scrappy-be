@@ -6,8 +6,20 @@ import Sports from "../../../models/sports.js";
 const espn = {
   name: "espn",
   Model: Sports,
-  url: "https://www.espn.com/",
-  linkSelector: ["a.contentItem__padding"],
+  url: [
+    "https://www.espn.com/",
+    "https://www.espn.com/nfl/",
+    "https://www.espn.com/college-football/",
+    "https://www.espn.com/nba/",
+    "https://www.espn.com/nhl/",
+    "https://www.espn.com/mlb/",
+    "https://www.espn.com/soccer/",
+  ],
+  linkSelector: [
+    "a.contentItem__padding",
+    "[data-mptype='headline']",
+    ".eplus-promo-link ",
+  ],
   articleSelectors: {
     titleSelector: [".article-header"],
     dateSelector: [".timestamp "],

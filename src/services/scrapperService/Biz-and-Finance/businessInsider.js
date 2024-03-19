@@ -6,16 +6,21 @@ import BizAndFinance from "../../../models/bizAndFinance.js";
 const businessInsider = {
   name: "businessInsider",
   Model: BizAndFinance,
-  // url: "https://www.businessinsider.com/?r=US&IR=T",
-  url: "https://africa.businessinsider.com/?r=US&IR=Tt",
-  linkSelector: [
-    // ".tout-title-link",
-    ".gradient-overlay a",
+  url: [
+    "https://www.businessinsider.com/retail",
+    "https://www.businessinsider.com/strategy",
+    "https://markets.businessinsider.com/",
+    "https://www.businessinsider.com/finance",
   ],
+  linkSelector: [".tout-title-link", "h2 a", "h3 a"],
   articleSelectors: {
     titleSelector: [".post-headline", ".article-headline"],
-    dateSelector: ["[data-e2e-name='byline-timestamp']", "time"],
-    contentSelector: [".enhanced-subtitle"],
+    dateSelector: [
+      ".byline-timestamp?data-timestamp",
+      "time",
+      ".byline-timestamp",
+    ],
+    contentSelector: [".enhanced-subtitle", ".summary-list"],
     articleContentSelector: [
       ".content-lock-content p",
       ".content-lock-content h2",

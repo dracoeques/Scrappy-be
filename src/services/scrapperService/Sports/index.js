@@ -1,6 +1,5 @@
 import clusterScrape from "../../../utils/scrapper/cluster-scrape.js";
 import { scrapeCategory } from "../../../utils/scrapper/scrape-category.js";
-import bbcSport from "./bbcSport.js";
 import bleacherReport from "./bleacherReport.js";
 import cbsSports from "./cbsSports.js";
 import espn from "./espn.js";
@@ -16,28 +15,39 @@ import euroSport from "./euroSport.js";
 import reutersSports from "./reutersSports.js";
 import aljazeeraSports from "./aljazeeraSports.js";
 import marca from "./marca.js";
-import theSydneyMorningHerald from "../politics/theSydneyMorningHerald.js";
 import nhkSports from "./nhkSports.js";
+import apNews from "./apNews.js";
+import bbc from "./bbc.js";
+import cnn from "./cnn.js";
+import theIndependent from "./theIndependent.js";
+import theTelegraph from "./theTelegraph.js";
+import tmz from "./tmz.js";
+import wallStreetJournal from "./wallStreetJournal.js";
 
 const allSport = [
-  bbcSport,
+  aljazeeraSports,
+  apNews,
+  bbc,
   bleacherReport,
   cbsSports,
+  cnn,
   espn,
+  euroSport,
   foxSports,
+  marca,
   nbcSports,
+  nhkSports,
+  reutersSports,
   sbNation,
   skySport,
-  theAthletic,
-  yahooSports,
-  theGuardianSport,
   sportsNet,
-  euroSport,
-  reutersSports,
-  aljazeeraSports,
-  marca,
-  theSydneyMorningHerald,
-  nhkSports,
+  theAthletic,
+  theGuardianSport,
+  theIndependent,
+  theTelegraph,
+  tmz,
+  wallStreetJournal,
+  yahooSports,
 ];
 
 export const getNews = async () => {

@@ -3,6 +3,7 @@ import {
   currentDate,
   getArgs,
   isWithinRange,
+  printHighlightedText,
   readSavedDocumnets,
   saveDocuments,
   scrollToBottom,
@@ -14,10 +15,9 @@ export const getArticles = async ({
   articleProps,
   page,
   saveAfter = 1,
-  retryErrors = false,
   single = true,
 }) => {
-  const { dateFrom } = getArgs();
+  const { dateFrom, retryError } = getArgs();
   if (!articleProps || !page) return;
   const {
     name,
@@ -27,6 +27,7 @@ export const getArticles = async ({
     waitUntil,
     articlesWaitUntil = "domcontentloaded",
     Model,
+    selectorWaitTime = 0,
   } = articleProps;
   try {
     if (Model == undefined) return;
@@ -62,7 +63,7 @@ export const getArticles = async ({
         ? "domcontentloaded"
         : articlesWaitUntil;
     await page.setViewport({ width: 1000, height: 6000 });
-
+    // await page.screenshot({ path: `${name}.jpg`, fullPage: true });
     // navigate to url and wait for it to load
     const pageData = [];
     const pageErrorData = [];
@@ -116,7 +117,7 @@ export const getArticles = async ({
           // checking if link is already fetched.
           if (
             (currentLinks && currentLinks.includes(link)) ||
-            (!retryErrors &&
+            (!retryError &&
               currentErrorLinks &&
               currentErrorLinks.includes(link))
           ) {
@@ -124,12 +125,18 @@ export const getArticles = async ({
             pageCount++;
             continue;
           } else console.log("Link not found. Fetching link");
-
+          if (retryError) printHighlightedText("Retrying errors");
           console.log(`page ${pageCount} of ${totalPages}`);
 
-          const currPage = await getPageData(link, page, articlesWaitUntilVal, {
-            ...articleSelectors,
-          });
+          const currPage = await getPageData(
+            link,
+            page,
+            articlesWaitUntilVal,
+            selectorWaitTime,
+            {
+              ...articleSelectors,
+            }
+          );
           console.log("current page data: \n");
           console.log(currPage);
           currPage.siteName = name;
@@ -138,7 +145,7 @@ export const getArticles = async ({
             currPage.link &&
             currPage.title &&
             currPage.date &&
-            isWithinRange(currPage.date, dateFrom) &&
+            (dateFrom < 0 || isWithinRange(currPage.date, dateFrom)) &&
             currPage.article
           ) {
             console.log("pushing current page");
@@ -150,7 +157,7 @@ export const getArticles = async ({
               if (!currPage[key] || currPage[key].length === 0)
                 causesOfError.push(`${key} missing.`);
             }
-            if (!isWithinRange(currPage.date, dateFrom))
+            if (!isWithinRange(currPage.date, dateFrom) && dateFrom > 0)
               causesOfError.push(
                 `Expected date to be after ${moment()
                   .subtract(dateFrom, "days")

@@ -6,7 +6,7 @@ import ArtAndFashion from "../../../models/artAndFashion.js";
 const vogue = {
   name: "vogue",
   Model: ArtAndFashion,
-  url: "https://www.vogue.com/",
+  url: ["https://www.vogue.com/fashion", "https://www.vogue.com/"],
   linkSelector: [".summary-item__hed-link"],
   articleSelectors: {
     titleSelector: [".ContentHeaderHed-NCyCC", "h1"],

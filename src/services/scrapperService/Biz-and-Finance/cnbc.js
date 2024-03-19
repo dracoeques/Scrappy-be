@@ -6,12 +6,27 @@ import BizAndFinance from "../../../models/bizAndFinance.js";
 const cnbc = {
   name: "cnbc",
   Model: BizAndFinance,
-  url: "https://www.cnbc.com/world/",
-  linkSelector: [".RiverHeadline-headline > a"],
+  url: [
+    "https://www.cnbc.com/markets/",
+    "https://www.cnbc.com/world/",
+    "https://www.cnbc.com/business/",
+  ],
+  linkSelector: [".RiverHeadline-headline > a", ".Card-titleContainer a"],
   articleSelectors: {
-    titleSelector: [".LiveBlogHeader-headline", ".ArticleHeader-headline"],
-    dateSelector: ["time"],
-    contentSelector: [".ArticleBody-articleBody p"],
+    titleSelector: [
+      ".LiveBlogHeader-headline",
+      ".ArticleHeader-headline",
+      ".ClipPlayer-clipPlayerIntroTitle",
+    ],
+    dateSelector: [
+      "time",
+      ".ClipPlayer-clipPlayerIntroTime span span:first-child",
+    ],
+    contentSelector: [
+      ".ArticleBody-articleBody p",
+      ".ClipPlayer-clipPlayerIntroSummary",
+      ".LiveBlogHeader-explainer p",
+    ],
     articleContentSelector: [
       ".FeaturedContent-articleBody p",
       ".FeaturedContent-articleBody h2",

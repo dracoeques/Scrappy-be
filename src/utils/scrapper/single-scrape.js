@@ -21,7 +21,11 @@ export const singleScrape = async function ({
   try {
     console.log("trying");
     await getArticles({ articleProps: article, page, single, retryError });
+    console.log("Finished scraping site ", article.url);
+    process.exit(0);
   } catch (err) {
     console.error("Problem when scraping sites ", err);
+    process.exit(1);
+  } finally {
   }
 };

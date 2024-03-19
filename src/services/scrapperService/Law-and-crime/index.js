@@ -11,6 +11,7 @@ import theCrimeReport from "./theCrimeReport.js";
 import theMarshallProject from "./theMarshallProject.js";
 import associatedPress from "./associatedPress.js";
 import theIndependent from "./theIndependent.js";
+import lawTopics from "./lawTopics.js";
 
 const allLaw = [
   aboveTheLaw,
@@ -20,6 +21,7 @@ const allLaw = [
   findLaw,
   justia,
   law,
+  lawTopics,
   legalInsurrection,
   theCrimeReport,
   theIndependent,

@@ -6,12 +6,22 @@ import Web3 from "../../../models/web3.js";
 const coinMarketCap = {
   name: "coinMarketCap",
   Model: Web3,
-  url: "https://coinmarketcap.com/headlines/news/",
+  url: [
+    "https://coinmarketcap.com/headlines/",
+    "https://coinmarketcap.com/headlines/news/",
+  ],
   linkSelector: [".sc-aef7b723-0 .imWlwI"],
   articleSelectors: {
     titleSelector: [".llGAYu", ".entry-title", ".cECJcb", "h1"],
-    dateSelector: [".fCASWb", ".gJqtyQ", ".cp-entry-meta-left"],
-    contentSelector: [".hgxoko p", ".cvngAK", ".article-tldr"],
+    dateSelector: [
+      ".fCASWb",
+      ".gJqtyQ",
+      ".cp-entry-meta-left",
+      ".elementor-post-info__item--type-date",
+      "time?datetime",
+      "time",
+    ],
+    contentSelector: [".hgxoko p", ".cvngAK", ".article-tldr", ".tldr-content"],
     articleContentSelector: [
       ".hgxoko p",
       ".hgxoko h2",
@@ -31,6 +41,12 @@ const coinMarketCap = {
       "article h4",
       "article h5",
       "article h6",
+      ".postbody p",
+      ".postbody h2",
+      ".postbody h3",
+      ".postbody h4",
+      ".postbody h5",
+      ".postbody h6",
     ],
   },
 };

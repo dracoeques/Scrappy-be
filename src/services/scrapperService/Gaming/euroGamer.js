@@ -6,7 +6,11 @@ import Gaming from "../../../models/gaming.js";
 const euroGamer = {
   name: "euroGamer",
   Model: Gaming,
-  url: "https://www.eurogamer.net/",
+  url: [
+    "https://www.eurogamer.net/nintendo",
+    "https://www.eurogamer.net/pc",
+    "https://www.eurogamer.net/",
+  ],
   linkSelector: ['[data-type="article"] a'],
   articleSelectors: {
     titleSelector: [".title"],

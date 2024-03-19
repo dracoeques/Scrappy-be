@@ -10,6 +10,7 @@ import allScienceAndTech from "./services/scrapperService/Science-and-Tech/index
 import allSport from "./services/scrapperService/Sports/index.js";
 import allWeb3 from "./services/scrapperService/Web3/index.js";
 import allPolitics from "./services/scrapperService/politics/index.js";
+import { getCategoryLimits } from "./utils/utils.js";
 
 const allArticles = [
   ...allArtAndFashion,
@@ -28,7 +29,9 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await scrapeCategory(allArticles, import.meta.url);
+  const { start, end } = getCategoryLimits();
+  const articleToScrape = allArticles.splice(start, end);
+  await scrapeCategory(articleToScrape, import.meta.url);
 })();
 
 export default allArticles;

@@ -39,47 +39,75 @@ import theFederalist from "./theFederalist.js";
 import theNation from "./theNation.js";
 import theNewRepublic from "./theNewRepublic.js";
 import yahooPolitics from "./yahooPolitics.js";
+import amGreatness from "./amgreatness.js";
+import apNews from "./apNews.js";
+import axios from "./axios.js";
+import bloomberg from "./bloomberg.js";
+import breitbart from "./breitbart.js";
+import cbsNews from "./cbsNews.js";
+import nationalReview from "./nationalReview.js";
+import nber from "./nber.js";
+import nyTimes from "./nyTimes.js";
+import pewResearch from "./pewResearch.js";
+import theIntercept from "./theIntercept.js";
+import theModerateVoice from "./theModerateVoice.js";
+import visualCapitalist from "./visualCapitalist.js";
+import wallStreetJournal from "./wallStreetJournal.js";
 
 const allPolitics = [
-  allSlides,
   abcPolitics,
   alJazeera,
+  allSlides,
+  amGreatness,
+  apNews,
+  axios,
   bbc,
+  bloomberg,
+  breitbart,
+  cbsNews,
+  chicagoTribune,
   cnbc,
   cnn,
   dailyKos,
   foxNews,
+  gulfNews,
   huffPost,
   losAngelesTimes,
   motherJones,
+  nationalReview,
   nbcNews,
+  nber,
   npr,
+  nyTimes,
+  pewResearch,
   politico,
   politiFact,
   proPublica,
   reason,
   reuters,
   slate,
+  southChinaMorningPost,
+  sputnikNews,
   talkingPointMemo,
   theAmericanConservative,
   theAtlantic,
   theFederalist,
-  theNation,
-  theNewRepublic,
-  yahooPolitics,
+  theGlobeAndMail,
   theGuardian,
   theHill,
-  usaTodayPolitics,
-  washingtonPostPolitics,
-  theTelegraph,
-  chicagoTribune,
-  theGlobeAndMail,
-  southChinaMorningPost,
+  theIntercept,
   theJapanTimes,
+  theModerateVoice,
+  theNation,
+  theNewRepublic,
   theSydneyMorningHerald,
+  theTelegraph,
+  usaTodayPolitics,
+  visualCapitalist,
+  wallStreetJournal,
+  washingtonPostPolitics,
   xinhuaNewsAgency,
-  sputnikNews,
-  gulfNews,
+  yahooPolitics,
 ];
 
 export const getNews = async () => {

@@ -6,13 +6,16 @@ import Politics from "../../../models/politics.js";
 const theGuardian = {
   name: "theGuardian",
   Model: Politics,
-  url: "https://www.theguardian.com/international",
-  linkSelector: [".fc-item__link"],
+  url: [
+    "https://www.theguardian.com/us-news/us-politics",
+    "https://www.theguardian.com/international",
+  ],
+  linkSelector: [".fc-item__link", ".dcr-lv2v9o"],
   articleSelectors: {
-    titleSelector: '[data-gu-name="headline"]',
-    dateSelector: "[data-gu-name='meta']",
-    contentSelector: '[data-gu-name="standfirst"]',
-    articleContentSelector: ".article-body-commercial-selector > p",
+    titleSelector: [".dcr-1nlcpoh", "h1"],
+    dateSelector: [".dcr-u0h1qy"],
+    contentSelector: [".dcr-95in8m"],
+    articleContentSelector: [".article-body-viewer-selector p"],
   },
 };
 

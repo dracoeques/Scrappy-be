@@ -6,7 +6,7 @@ import LawAndCrime from "../../../models/lawAndCrime.js";
 const law = {
   name: "law",
   Model: LawAndCrime,
-  url: "https://www.law.com/",
+  url: ["https://www.law.com/"],
   linkSelector: [
     ".articleMain",
     ".sideArticle",

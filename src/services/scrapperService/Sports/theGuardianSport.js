@@ -5,13 +5,16 @@ import Sports from "../../../models/sports.js";
 const theGuardianSport = {
   name: "theGuardianSport",
   Model: Sports,
-  url: "https://www.theguardian.com/uk/sport",
-  linkSelector: [".dcr-6vr3s5 a", ".dcr-bgmi23 a"],
+  url: [
+    "https://www.theguardian.com/uk/sport",
+    "https://www.theguardian.com/us/sport",
+  ],
+  linkSelector: [".dcr-lv2v9o"],
   articleSelectors: {
-    titleSelector: [".dcr-y70mar"],
-    dateSelector: [".dcr-u0h1qy"],
-    contentSelector: [".dcr-ls03tr li"],
-    articleContentSelector: [".article-body-commercial-selector p"],
+    titleSelector: [".dcr-1nlcpoh", "h1"],
+    dateSelector: [".dcr-u0h1qy", ".dcr-1vmj0r"],
+    contentSelector: [".dcr-95in8m"],
+    articleContentSelector: [".article-body-viewer-selector p"],
   },
 };
 

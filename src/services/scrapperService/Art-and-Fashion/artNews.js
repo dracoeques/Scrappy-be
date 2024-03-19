@@ -5,7 +5,10 @@ import ArtAndFashion from "../../../models/artAndFashion.js";
 const artNews = {
   name: "artNews",
   Model: ArtAndFashion,
-  url: "https://www.artnews.com/",
+  url: [
+    "https://www.artnews.com/c/art-in-america/",
+    "https://www.artnews.com/",
+  ],
   linkSelector: [".c-title__link"],
   articleSelectors: {
     titleSelector: [".article-title", "h1"],

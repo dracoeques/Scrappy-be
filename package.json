@@ -9,7 +9,8 @@
     "start:test": "node ./src/index.js&&NODE_ENV=test",
     "start:prod": "nodemon ./src/index.js",
     "scrape": "node ./src/scrapeAll.js",
-    "scrape:job": "node ./src/startJobs.js"
+    "scrape:job": "node ./src/startJobs.js",
+    "postinstall": "patch-package"
   },
   "keywords": [
     "scrapper",
@@ -23,6 +24,7 @@
     "express": "^4.18.2",
     "moment": "^2.29.4",
     "mongoose": "^7.2.2",
+    "patch-package": "^8.0.0",
     "puppeteer": "^19.5.2",
     "puppeteer-cluster": "^0.23.0",
     "puppeteer-extra": "^3.3.6",

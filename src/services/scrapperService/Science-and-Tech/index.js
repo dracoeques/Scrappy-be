@@ -23,31 +23,109 @@ import ventureBeat from "./ventureBeat.js";
 import voxTech from "./voxTech.js";
 import techRadar from "./techRadar.js";
 import yahoo from "./yahoo.js";
+import androidAuthority from "./androidAuthority.js";
+import bbc from "./bbc.js";
+import bbcFuture from "./bbcFuture.js";
+import businessInsider from "./businessInsider.js";
+import cas from "./cas.js";
+import cnbc from "./cnbc.js";
+import digitalTrends from "./digitalTrends.js";
+import eurekalert from "./eurekalert.js";
+import extremeTech from "./extremeTech.js";
+import futurism from "./futurism.js";
+import futurity from "./futurity.js";
+import geekWire from "./geekWire.js";
+import howStuffWorks from "./howStuffWorks.js";
+import inverse from "./inverse.js";
+import itif from "./itif.js";
+import mitNews from "./mitNews.js";
+import newsCenter from "./newsCenter.js";
+import npr from "./npr.js";
+import pcMag from "./pcMag.js";
+import phys from "./phys.js";
+import pubmed from "./pubmed.js";
+import quantaMagazine from "./quantaMagazine.js";
+import scienceAlert from "./scienceAlert.js";
+import smithsonianMagazine from "./smithsonianMagazine.js";
+import space from "./space.js";
+import techRepublic from "./techRepublic.js";
+import techSpot from "./techSpot.js";
+import techTimes from "./techTimes.js";
+import theGuardian from "./theGuardian.js";
+import theNextWeb from "./theNextWeb.js";
+import tomsHardware from "./tomsHardware.js";
+import uberGizmo from "./uberGizmo.js";
+import wallStreetJournal from "./wallStreetJournal.js";
+import wccfTech from "./wccfTech.js";
+import zdnet from "./zdnet.js";
+import scienceFriday from "./scienceFirday.js";
+import scienceNews from "./scienceNews.js";
+import sciTechDaily from "./sciTechDaily.js";
+import techExplore from "./techExplore.js";
 
 const allScienceAndTech = [
+  androidAuthority,
   arsTechnica,
+  bbc,
+  bbcFuture,
+  businessInsider,
+  cas,
+  cnbc,
   cnet,
+  digitalTrends,
   engadget,
+  eurekalert,
+  extremeTech,
+  futurism,
+  futurity,
+  geekWire,
+  gigaom,
+  gizChina,
   gizmodo,
+  howStuffWorks,
+  ieeeSpectrum,
+  inverse,
+  itif,
   liveScience,
-  popularScience,
-  scienceDaily,
-  scientificAmerican,
-  techCrunch,
-  theVerge,
-  wired,
+  mashable,
+  mitNews,
   mitTechnologyReview,
   nature,
-  science,
-  mashable,
-  ieeeSpectrum,
-  gizChina,
-  ventureBeat,
-  techRadar,
-  gigaom,
+  newsCenter,
+  npr,
+  pcMag,
+  phys,
+  popularScience,
+  pubmed,
+  quantaMagazine,
   readWrite,
+  science,
+  scienceAlert,
+  scienceDaily,
+  scienceFriday,
+  scienceNews,
+  scientificAmerican,
+  sciTechDaily,
+  smithsonianMagazine,
+  space,
+  techCrunch,
+  techExplore,
+  techRadar,
+  techRepublic,
+  techSpot,
+  techTimes,
+  theGuardian,
+  theNextWeb,
+  theVerge,
+  tomsHardware,
+  uberGizmo,
+  ventureBeat,
   voxTech,
+  wallStreetJournal,
+  wccfTech,
+  wired,
   yahoo,
+  zdnet,
 ];
 
 export const getNews = async () => {

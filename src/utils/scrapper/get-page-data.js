@@ -2,6 +2,7 @@ export const getPageData = async (
   link,
   page,
   articlesWaitUntil,
+  selectorWaitTime,
   { titleSelector, dateSelector, contentSelector, articleContentSelector }
 ) => {
   if (!link) {
@@ -15,12 +16,22 @@ export const getPageData = async (
       waitUntil: articlesWaitUntil,
       timeout: 75000,
     });
+    if (selectorWaitTime && selectorWaitTime > 0) {
+      await page.waitForSelector(titleSelector, { timeout: selectorWaitTime });
+      await page.waitForSelector(dateSelector, { timeout: selectorWaitTime });
+      await page.waitForSelector(contentSelector, {
+        timeout: selectorWaitTime,
+      });
+      await page.waitForSelector(articleContentSelector, {
+        timeout: selectorWaitTime,
+      });
+    }
   } catch (err) {
     console.log(`Error when fetching link ${link}. Skipping link.`);
   }
 
   await page.setViewport({ width: 1000, height: 6000 });
-
+  // await page.screenshot({ path: "./here.jpg", fullPage: true });
   const currPageData = await page.evaluate(
     ({
       titleSelector,
@@ -58,7 +69,7 @@ export const getPageData = async (
             dateSelector.indexOf(dateElementSelector) !==
             dateSelector.length - 1
           )
-            dateElementSelector += ", ";
+            dateElementSelector += `[${dateAttrSelector}], `;
         } else {
           dateElementSelector += `${currDateSelector}`;
           dateAttrSelector = "";
@@ -69,6 +80,12 @@ export const getPageData = async (
             dateElementSelector += ", ";
         }
       }
+      dateElementSelector = dateElementSelector.trim();
+      if (dateElementSelector[dateElementSelector.length - 1] === ",")
+        dateElementSelector = dateElementSelector.slice(
+          0,
+          dateElementSelector.length - 1
+        );
       const dateTimeElement = getElement(dateElementSelector, false);
       const dateTime =
         !dateTimeElement.empty &&
@@ -76,7 +93,6 @@ export const getPageData = async (
         dateTimeElement.getAttribute(dateAttrSelector)
           ? dateTimeElement.getAttribute(dateAttrSelector)
           : dateTimeElement.innerText;
-
       const content = getElement(contentSelector, false).innerText;
       const articleContent = Array.from(
         getElement(articleContentSelector, true)

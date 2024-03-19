@@ -1,5 +1,6 @@
 import clusterScrape from "../../utils/scrapper/cluster-scrape.js";
 import { scrapeCategory } from "../../utils/scrapper/scrape-category.js";
+import { getCategoryLimits } from "../../utils/utils.js";
 import allArtAndFashion from "./Art-and-Fashion/index.js";
 import allBizAndFinance from "./Biz-and-Finance/index.js";
 import allEntertainment from "./Entertainment/index.js";
@@ -28,7 +29,10 @@ export const getNews = async () => {
 };
 
 (async () => {
-  await scrapeCategory(allArticles, import.meta.url);
+  const { start, end } = getCategoryLimits();
+  const articleToScrape = allArticles.splice(start, end);
+
+  await scrapeCategory(articleToScrape, import.meta.url);
 })();
 
 export default allArticles;

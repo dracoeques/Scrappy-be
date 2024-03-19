@@ -8,7 +8,7 @@ import cryptoSlate from "./cryptoSlate.js";
 import decrypt from "./decrypt.js";
 import theBlock from "./theBlock.js";
 import theDefiant from "./theDefiant.js";
-import CoinGape from "./coinGape.js";
+import coinGape from "./coinGape.js";
 import coinMarketCap from "./coinMarketCap.js";
 import cryptoBriefing from "./cryptoBriefing.js";
 import cryptoNinjas from "./cryptoNinjas.js";
@@ -22,25 +22,25 @@ import cryptoGlobe from "./cryptoGlobe.js";
 import theMerkle from "./theMerkle.js";
 
 const allWeb3 = [
+  ambCrypto,
+  bitcoinist,
   blockonomi,
   braveNewCoin,
   coinDesk,
-  CoinGape,
+  coinGape,
+  coinJournal,
   coinMarketCap,
   cointelegraph,
   cryptoBriefing,
+  cryptoGlobe,
+  cryptoInsider,
+  cryptoNinjas,
+  cryptoPotato,
   cryptoSlate,
   decrypt,
+  newsBtc,
   theBlock,
   theDefiant,
-  cryptoNinjas,
-  bitcoinist,
-  newsBtc,
-  coinJournal,
-  cryptoInsider,
-  cryptoPotato,
-  ambCrypto,
-  cryptoGlobe,
   theMerkle,
 ];
 

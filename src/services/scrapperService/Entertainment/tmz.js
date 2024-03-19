@@ -6,7 +6,7 @@ import Entertainment from "../../../models/entertainment.js";
 const tmz = {
   name: "tmz",
   Model: Entertainment,
-  url: "https://www.tmz.com/",
+  url: ["https://www.tmz.com/hip-hop/", "https://www.tmz.com/"],
   linkSelector: [
     ".media-list__card-link ",
     ".hero-bar__card-link",

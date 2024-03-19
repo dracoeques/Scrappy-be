@@ -5,10 +5,10 @@ import ScienceAndTech from "../../../models/scienceAndTech.js";
 const nature = {
   name: "nature",
   Model: ScienceAndTech,
-  url: "https://www.nature.com/",
+  url: ["https://www.nature.com/srep/", "https://www.nature.com/"],
   linkSelector: [".c-card__link"],
   articleSelectors: {
-    titleSelector: [".c-article-magazine-title"],
+    titleSelector: [".c-article-magazine-title", ".c-article-title"],
     dateSelector: ["time"],
     contentSelector: [".c-article-teaser-text"],
     articleContentSelector: [

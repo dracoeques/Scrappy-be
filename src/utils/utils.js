@@ -107,7 +107,8 @@ export const getArgs = () => {
         alias: ["date-from", "df"],
         demandOption: false,
         default: 7,
-        describe: "Earliest date to include files (in days)",
+        describe:
+          "Earliest date to include files (in days). You can pass numbers less than there (e.g. -1) to disable date checking.",
         type: "number",
       },
       l: {
@@ -133,11 +134,49 @@ export const getArgs = () => {
         describe: "Retry Sites that have previously not been fully scraped",
         type: "boolean",
       },
+      f: {
+        alias: ["from-category", "fc"],
+        demandOption: false,
+        default: 1,
+        describe: `From which category to start scraping. \nArticle list order ${articleList}`,
+        type: "number",
+      },
+      t: {
+        alias: ["to-category", "tc"],
+        demandOption: false,
+        default: articleList.length,
+        describe: `Catagory on which scraping stops. \nArticle list order ${articleList}`,
+        type: "number",
+      },
     })
     .wrap(null)
     .help("help").argv;
 };
 
+export const getCategoryLimits = () => {
+  const { fromCategory, toCategory } = getArgs();
+  const spliceStart = fromCategory < 1 ? 1 : fromCategory - 1;
+  const spliceEnd =
+    toCategory > articleList.length
+      ? articleList.length
+      : toCategory - fromCategory + 1;
+
+  return { start: spliceStart, end: spliceEnd };
+};
+
 export const printHighlightedText = (text) => {
   console.log("\x1b[1m\x1b[43m\x1b[34m%s\x1b[0m", text);
 };
+
+export const articleList = [
+  "Art and Fashion",
+  "Business and Finance",
+  "Entertainment",
+  "Gaming",
+  "Law",
+  "Lifestyle and Health",
+  "Politics",
+  "Science and Tech",
+  "Sport",
+  "Web3",
+];
