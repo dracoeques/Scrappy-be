@@ -29,9 +29,9 @@ export const getNews = async () => {
 };
 
 (async () => {
-  const { start, end } = getCategoryLimits();
-  const articleToScrape = allArticles.splice(start, end);
-  await scrapeCategory(articleToScrape, import.meta.url);
+  // const { start, end } = getCategoryLimits();
+  // const articleToScrape = allArticles.splice(start, end);
+  await scrapeCategory(allArticles, import.meta.url);
 })();
 
 export default allArticles;
