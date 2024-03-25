@@ -20,10 +20,19 @@ import cryptoPotato from "./cryptoPotato.js";
 import ambCrypto from "./ambCrypto.js";
 import cryptoGlobe from "./cryptoGlobe.js";
 import theMerkle from "./theMerkle.js";
+import theBlockchain from "./theBlockchain.js";
+import ethereumWorldNews from "./ethereumworldnews.js";
+import cryptonews from "./cryptonews.js";
+import bankless from "./bankless.js";
+import bitfinex from "./bitfinex.js";
+import zycrypto from "./zycrypto.js";
+import okx from "./okx.js";
 
 const allWeb3 = [
   ambCrypto,
+  bankless,
   bitcoinist,
+  bitfinex,
   blockonomi,
   braveNewCoin,
   coinDesk,
@@ -34,14 +43,19 @@ const allWeb3 = [
   cryptoBriefing,
   cryptoGlobe,
   cryptoInsider,
+  cryptonews,
   cryptoNinjas,
   cryptoPotato,
   cryptoSlate,
   decrypt,
+  ethereumWorldNews,
   newsBtc,
+  okx,
   theBlock,
+  theBlockchain,
   theDefiant,
   theMerkle,
+  zycrypto,
 ];
 
 export const getNews = async () => {

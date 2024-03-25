@@ -52,6 +52,8 @@ import whiteHotMagazine from "./whiteHotMagazine.js";
 import whoWhatWear from "./whoWhatWear.js";
 import wired from "./wired.js";
 import xxlmag from "./xxlmag.js";
+import theArtNewspaper from "./theArtNewspaper.js";
+import bussinessOfFashion from "./bussinessOfFashion.js";
 
 const allArtAndFashion = [
   allMusic,
@@ -59,6 +61,7 @@ const allArtAndFashion = [
   artNews,
   artsy,
   bbc,
+  bussinessOfFashion,
   cnn,
   complex,
   consequence,
@@ -90,6 +93,7 @@ const allArtAndFashion = [
   spin,
   stereogum,
   styleCraze,
+  theArtNewspaper,
   theCurvyFashionista,
   theCut,
   theFader,

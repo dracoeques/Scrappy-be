@@ -6,6 +6,7 @@ import billboard from "./billboard.js";
 import cbsNews from "./cbs.js";
 import chinaDaily from "./chinaDaily.js";
 import cnn from "./cnn.js";
+import collider from "./collider.js";
 import dailyDot from "./dailydot.js";
 import dailyMail from "./dailyMail.js";
 import deadline from "./deadline.js";
@@ -26,6 +27,7 @@ import springwise from "./springWise.js";
 import theTelegraph from "./telegraph.js";
 import theChosunIlbo from "./theChosunIlbo.js";
 import theHollywoodReporter from "./theHollywoodReporter.js";
+import theWrap from "./theWrap.js";
 import timesOfIndia from "./timesOfIndia.js";
 import tmz from "./tmz.js";
 import usWeekly from "./usWeekly.js";
@@ -40,6 +42,7 @@ const allEntertainment = [
   cbsNews,
   chinaDaily,
   cnn,
+  collider,
   dailyDot,
   dailyMail,
   deadline,
@@ -60,6 +63,7 @@ const allEntertainment = [
   theTelegraph,
   theChosunIlbo,
   theHollywoodReporter,
+  theWrap,
   timesOfIndia,
   tmz,
   usWeekly,

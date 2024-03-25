@@ -40,6 +40,8 @@ import swimSwam from "./swimSwam.js";
 import tennis from "./tennis.js";
 import thrasherMagazine from "./thrasherMagazine.js";
 import trackAndFieldNews from "./trackAndFieldNews.js";
+import deadspin from "./deadspin.js";
+import theRinger from "./theRinger.js";
 
 const allSport = [
   aljazeeraSports,
@@ -53,6 +55,7 @@ const allSport = [
   cnn,
   cricketWorld,
   cyclingNews,
+  deadspin,
   espn,
   euroSport,
   formula1,
@@ -76,6 +79,7 @@ const allSport = [
   theAthletic,
   theGuardianSport,
   theIndependent,
+  theRinger,
   theTelegraph,
   thrasherMagazine,
   tmz,
