@@ -19,8 +19,8 @@ const cnbc = {
       ".ClipPlayer-clipPlayerIntroTitle",
     ],
     dateSelector: [
-      "time",
-      ".ClipPlayer-clipPlayerIntroTime span span:first-child",
+      "time?datetime",
+      // ".ClipPlayer-clipPlayerIntroTime span span:first-child",
     ],
     contentSelector: [
       ".ArticleBody-articleBody p",

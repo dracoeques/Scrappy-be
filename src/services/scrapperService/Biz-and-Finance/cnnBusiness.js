@@ -10,7 +10,7 @@ const cnnBusiness = {
   linkSelector: ["[data-link-type='article']"],
   articleSelectors: {
     titleSelector: [".headline__text", "h1"],
-    dateSelector: [".timestamp", "time"],
+    dateSelector: ['meta[property="article:published_time"]?content'],
     contentSelector: [".article__content p"],
     articleContentSelector: [
       ".article__content p",
